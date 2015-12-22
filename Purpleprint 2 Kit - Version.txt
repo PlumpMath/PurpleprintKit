@@ -1,0 +1,15 @@
+Purpleprint 2 - Kit (c) 2014-2016 by David Palacios (Hevedy) <https://github.com/Hevedy> <https://github.com/Hevedy/PurpleprintKit>
+
+
+Purpleprint 2 Kit - Version
+
+Status: Alpha
+Version: 2.0.0.2 (2015/12/04)
+
+Purpleprint 2 Kit - Old Versions
+
+Status: Alpha
+Version: 2.0.0.1 (2015/11/21)
+
+Status: Alpha
+Version: 2.0.0.0 (2015/11/20)

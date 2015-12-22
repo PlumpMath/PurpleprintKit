@@ -1,0 +1,21 @@
+{
+	"FileVersion" : 3,
+
+	"FriendlyName" : "Purpleprint 2 - Kit Plugin",
+	"Version" : 1,
+	"VersionName" : "2.0",
+	"CreatedBy" : "David 'Hevedy' Palacios",
+	"CreatedByURL" : "",
+	"EngineVersion" : 1579795,
+	"Description" : "New functions and new nodes in Blueprints",
+	"Category" : "PurpleprintKit Plugin",
+	"EnabledByDefault" : false,
+
+	"Modules" :
+	[
+		{
+			"Name" : "PPKLibrary",
+			"Type" : "Runtime"
+		}
+	]
+}
