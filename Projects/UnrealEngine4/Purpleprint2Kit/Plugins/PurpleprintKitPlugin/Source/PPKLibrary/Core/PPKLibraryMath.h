@@ -40,26 +40,105 @@ PPKLibraryMath.h
 
 #include "PPKLibraryMath.generated.h"
 
-UENUM()
-enum class EIniFilesList : uint8 {
-	GGameIni 				UMETA( DisplayName = "Game" ),
-	GGameUserSettingsIni	UMETA( DisplayName = "User Settings" ),
-	GScalabilityIni			UMETA( DisplayName = "Scalability" ),
-	GInputIni				UMETA( DisplayName = "Input" ),
-	GEngineIni				UMETA( DisplayName = "Engine" )
+UENUM(BlueprintType)
+enum class ETimeUnitsList : uint8 {
+	TUNanosecond		UMETA( DisplayName = "(Nano) Nanosecond" ),
+	TUMicrosecond		UMETA( DisplayName = "(Micro) Microsecond" ),
+	TUMillisecond		UMETA( DisplayName = "(Milli) Millisecond" ),
+	TUSecond			UMETA( DisplayName = "(s) Second" ),
+	TUMinute			UMETA( DisplayName = "(m) Minute" ),
+	TUHour				UMETA( DisplayName = "(H) Hour" ),
+	TUDay				UMETA( DisplayName = "(d) Day" ),
+	TUWeek				UMETA( DisplayName = "(W) Week" ),
+	TUMonth				UMETA( DisplayName = "(M) Month" ),
+	TUYear				UMETA( DisplayName = "(Y) Year" ),
+	TUDecade			UMETA( DisplayName = "(D) Decade" ),
+	TUCentury			UMETA( DisplayName = "(C) Century" )
 };
 
+USTRUCT( BlueprintType )
+struct FTimeUnitsStruct {
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
+	float uNanosecond;
+
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
+	float uMicrosecond;
+
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
+	float uMillisecond;
+
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
+	float uSecond;
+
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
+	float uMinute;
+
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
+	float uHour;
+
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
+	float uDay;
+
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
+	float uWeek;
+
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
+	float uMonth;
+
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
+	float uYear;
+
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
+	float uDecade;
+
+	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
+	float uCentury;
+
+	FTimeUnitsStruct() {
+		uNanosecond = 0.f;
+		uMicrosecond = 0.f;
+		uMillisecond = 0.f;
+		uSecond = 0.f;
+		uMinute = 0.f;
+		uHour = 0.f;
+		uDay = 0.f;
+		uWeek = 0.f;
+		uMonth = 0.f;
+		uYear = 0.f;
+		uDecade = 0.f;
+		uCentury = 0.f;
+	}
+};
 
 UCLASS()
 class PPKLIBRARY_API UPPKLibraryMath : public UBlueprintFunctionLibrary {
 	GENERATED_BODY()
 
+	UPPKLibraryMath( const FObjectInitializer& ObjectInitializer );
 private:
 
 protected:
 
 public:
+	static float GetTimeUnitValue( const ETimeUnitsList timeUnit );
 
+	/** Returns a float from two ints A and B to A.B */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Time Units Converter" ), Category = "PP2KLibrary|Units|Converters" )
+		static float TimeUnitsConverterSimple( const float unitValue, const ETimeUnitsList unitFrom, const ETimeUnitsList unitTo, const bool bTruncate );
+
+	/** Returns a float from two ints A and B to A.B */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Time Units Converter Advanced" ), Category = "PP2KLibrary|Units|Converters" )
+		static void TimeUnitsConverterAdvanced( const float unitValue, const ETimeUnitsList unitFrom, const ETimeUnitsList unitToValueA, const ETimeUnitsList unitToValueB, const bool bTruncateA, const bool bTruncateB, float& unitValueOriginal, float& unitValueATo, float& unitValueBTo );
+
+	/** Returns a float from two ints A and B to A.B */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Time Units Converter Complete" ), Category = "PP2KLibrary|Units|Converters" )
+	static void TimeUnitsConverterComplete( const float unitValue, const ETimeUnitsList unitFrom, const bool bTruncate, FTimeUnitsStruct& unitList );
+
+	/** Returns the float inverted A.B to B.A */
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Float" )
+		static float ReportFloatPrecision();
 
 	//TODO Random functions
 
@@ -78,11 +157,11 @@ public:
 
 	/** Returns a float from two ints A and B to A.B */
 	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Make Float" ), Category = "PP2KLibrary|Math|Float" )
-		static float MakeFloatFromInts( const int32 A, int32 B );
+		static float MakeFloatFromInts( const int32 A, const int32 B );
 
 	/** Returns split a float into two ints A.B to A and B */
 	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Break Float" ), Category = "PP2KLibrary|Math|Float" )
-		static int32 DivideFloatIntoInts( const float Ref, int32 B );
+		static int32 DivideFloatIntoInts( const float Ref, int32& B );
 
 	/** Returns the float inverted A.B to B.A */
 	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Invert Float Order" ), Category = "PP2KLibrary|Math|Float" )
@@ -213,70 +292,6 @@ public:
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Math|Vector" )
 		static FVector4 Vector4OrderLeft( const FVector4 &vector4Value );
 
-	/** Returns the value of the selected bool from the selected ini config file */
-	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static bool GetConfigBool( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
-
-	/** Returns the value of the selected int32 from the selected ini config file */
-	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static int32 GetConfigInt( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
-
-	/** Returns the value of the selected float from the selected ini config file */
-	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static float GetConfigFloat( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
-
-	/** Returns the value of the selected FVector from the selected ini config file */
-	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static FVector GetConfigVector( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
-
-	/** Returns the value of the selected FRotator from the selected ini config file */
-	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static FRotator GetConfigRotator( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
-
-	/** Returns the value of the selected FLinearColor from the selected ini config file */
-	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static FLinearColor GetConfigColor( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
-
-	/** Returns the value of the selected FString from the selected ini config file */
-	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static FString GetConfigString( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
-
-	/** Returns the value of the selected FVector2D from the selected ini config file */
-	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static FVector2D GetConfigVector2D( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
-
-	/** Set the value of the selected bool from the selected ini config file */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigBool( const FString sectionName, const FString variableName, const bool value, const EIniFilesList iniFile );
-
-	/** Set the value of the selected int32 from the selected ini config file */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigInt( const FString sectionName, const FString variableName, const int32 value, const EIniFilesList iniFile );
-
-	/** Set the value of the selected float from the selected ini config file */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigFloat( const FString sectionName, const FString variableName, const float value, const EIniFilesList iniFile );
-
-	/** Set the value of the selected FVector from the selected ini config file */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigVector( const FString sectionName, const FString variableName, const FVector value, const EIniFilesList iniFile );
-
-	/** Set the value of the selected FRotator from the selected ini config file */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigRotator( const FString sectionName, const FString variableName, const FRotator value, const EIniFilesList iniFile );
-
-	/** Set the value of the selected FLinearColor from the selected ini config file */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigColor( const FString sectionName, const FString variableName, const FLinearColor value, const EIniFilesList iniFile );
-
-	/** Set the value of the selected FString from the selected ini config file */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigString( const FString sectionName, const FString variableName, const FString value, const EIniFilesList iniFile );
-
-	/** Set the value of the selected FVector2D from the selected ini config file */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigVector2D( const FString sectionName, const FString variableName, const FVector2D value, const EIniFilesList iniFile );
-
 	/** Returns the number of characters in the int */
 	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Integer Size" ), Category = "PP2KLibrary|Math|Utils" )
 		static int32 IntCount( const int32 intValue );
@@ -286,7 +301,8 @@ public:
 		static int32 FloatCount( const float floatValue );
 
 	//Performance problem over here, the Blueprint take about 0.5 to 2min in open.
-	//But looks like other location problem no here
+	
+	/** Returns the minimum value of A and B */
 	UFUNCTION( BlueprintPure, meta = ( DisplayName = "Min (Byte)", CompactNodeTitle = "MIN", CommutativeAssociativeBinaryOperator = "true" ), Category = "PP2KLibrary|Math|Byte" )
 		static uint8 BMin( uint8 A, uint8 B );
 

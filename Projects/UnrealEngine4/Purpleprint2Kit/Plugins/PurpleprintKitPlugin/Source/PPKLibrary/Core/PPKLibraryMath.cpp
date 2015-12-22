@@ -38,9 +38,112 @@ PPKLibraryMath.cpp
 #include <chrono>
 #include <random>
 
+UPPKLibraryMath::UPPKLibraryMath( const class FObjectInitializer& ObjectInitializer ) {
+
+}
 
 std::random_device rd;
 unsigned gseed = std::chrono::system_clock::now().time_since_epoch().count();
+
+float UPPKLibraryMath::TimeUnitsConverterSimple( const float unitValue, const ETimeUnitsList unitFrom, const ETimeUnitsList unitTo, const bool bTruncate ) {
+	if ( bTruncate ) {
+		return FMath::TruncFloat( ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( unitTo ) );
+	}
+		return ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( unitTo );
+}
+
+void UPPKLibraryMath::TimeUnitsConverterAdvanced( const float unitValue, const ETimeUnitsList unitFrom, const ETimeUnitsList unitToValueA, const ETimeUnitsList unitToValueB, const bool bTruncateA, const bool bTruncateB, float& unitValueOriginal, float& unitValueATo, float& unitValueBTo ) {
+	unitValueOriginal = unitValue;
+	if ( !bTruncateA ) {
+		unitValueATo = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( unitToValueA );
+	} else {
+		unitValueATo = FMath::TruncFloat( ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( unitToValueA ) );
+	}
+
+	if ( !bTruncateB ) {
+		unitValueBTo = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( unitToValueB );
+	} else {
+		unitValueBTo = FMath::TruncFloat( ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( unitToValueB ) );
+	}
+}
+
+void UPPKLibraryMath::TimeUnitsConverterComplete( const float unitValue, const ETimeUnitsList unitFrom, const bool bTruncate, FTimeUnitsStruct& unitList ) {
+	if ( !bTruncate ) {
+		unitList.uNanosecond = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUNanosecond );
+		unitList.uMicrosecond = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUMicrosecond );
+		unitList.uMillisecond = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUMillisecond );
+		unitList.uSecond = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUSecond );
+		unitList.uMinute = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUMinute );
+		unitList.uHour = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUHour );
+		unitList.uDay = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUDay );
+		unitList.uWeek = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUWeek );
+		unitList.uMonth = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUMonth );
+		unitList.uYear = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUYear );
+		unitList.uDecade = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUDecade );
+		unitList.uCentury = ( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUCentury );
+	} else {
+		unitList.uNanosecond = FMath::TruncFloat(( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUNanosecond ));
+		unitList.uMicrosecond = FMath::TruncFloat(( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUMicrosecond ));
+		unitList.uMillisecond = FMath::TruncFloat(( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUMillisecond ));
+		unitList.uSecond = FMath::TruncFloat(( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUSecond ));
+		unitList.uMinute = FMath::TruncFloat(( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUMinute ));
+		unitList.uHour = FMath::TruncFloat(( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUHour ));
+		unitList.uDay = FMath::TruncFloat(( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUDay ));
+		unitList.uWeek = FMath::TruncFloat(( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUWeek ));
+		unitList.uMonth = FMath::TruncFloat(( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUMonth ));
+		unitList.uYear = FMath::TruncFloat(( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUYear ));
+		unitList.uDecade = FMath::TruncFloat(( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUDecade ));
+		unitList.uCentury = FMath::TruncFloat(( unitValue / GetTimeUnitValue( unitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUCentury ));
+	}
+}
+
+float UPPKLibraryMath::GetTimeUnitValue( const ETimeUnitsList timeUnit ) {
+	switch ( timeUnit ) {
+		case ETimeUnitsList::TUNanosecond:
+			return 1.f * 60.f * 60.f * 1000.f * 1000.f * 1000.f;
+			break;
+		case ETimeUnitsList::TUMicrosecond:
+			return 1.f * 60.f * 60.f * 1000.f * 1000.f;
+			break;
+		case ETimeUnitsList::TUMillisecond:
+			return 1.f * 60.f * 60.f * 1000.f;
+			break;
+		case ETimeUnitsList::TUSecond:
+			return 1.f * 60.f * 60.f;
+			break;
+		case ETimeUnitsList::TUMinute:
+			return 1.f * 60.f;
+			break;
+		case ETimeUnitsList::TUHour:
+			return 1.f; //Base
+			break;
+		case ETimeUnitsList::TUDay:
+			return 1.f / 24.f;
+			break;
+		case ETimeUnitsList::TUWeek:
+			return ( 1.f / 24.f ) / 7.f;
+			break;
+		case ETimeUnitsList::TUMonth:
+			return ( ( 1.f / 24.f ) / 7.f ) / 4.34821429f;
+			break;
+		case ETimeUnitsList::TUYear:
+			return ( ( ( 1.f / 24.f ) / 7.f ) / 4.34821429f ) / 12.f;
+			break;
+		case ETimeUnitsList::TUDecade:
+			return ( ( ( ( 1.f / 24.f ) / 7.f ) / 4.34821429f ) / 12.f ) / 10.f;
+			break;
+		case ETimeUnitsList::TUCentury:
+			return ( ( ( ( ( 1.f / 24.f ) / 7.f ) / 4.34821429f ) / 12.f ) / 10.f ) / 10.f;
+			break;
+	}
+	return 1.f;
+}
+
+float UPPKLibraryMath::ReportFloatPrecision() {
+	//float r = 1.f / 24.f * 45.f;
+	float r = 1 / 3.f;
+	return r;
+}
 
 void UPPKLibraryMath::BuildRandom() {
 	gseed = std::chrono::system_clock::now().time_since_epoch().count();
@@ -79,14 +182,14 @@ int32 UPPKLibraryMath::FloatCount( const float FloatValue ) {
 	return numValue.Len() - 1;
 }
 
-float UPPKLibraryMath::MakeFloatFromInts( const int32 A, int32 B ) {
+float UPPKLibraryMath::MakeFloatFromInts( const int32 A, const int32 B ) {
 	float value = A;
 	int32 m = 1;
 	for ( int32 i = 0; i <= IntCount( B ); ++i ) { m *= 10; }
 	return value + ( B / m );
 }
 
-int32 UPPKLibraryMath::DivideFloatIntoInts( const float Ref, int32 B ) {
+int32 UPPKLibraryMath::DivideFloatIntoInts( const float Ref, int32& B ) {
 	B = FMath::Frac( Ref );
 	return FMath::TruncToInt( Ref );
 }
@@ -253,294 +356,6 @@ FVector UPPKLibraryMath::VectorOrderLeft( const FVector &vectorValue ) {
 
 FVector4 UPPKLibraryMath::Vector4OrderLeft( const FVector4 &vector4Value ) {
 	return FVector4( vector4Value.Y, vector4Value.Z, vector4Value.W, vector4Value.X );
-}
-
-bool UPPKLibraryMath::GetConfigBool( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return false;
-
-	bool value = false;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetBool( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetBool( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetBool( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetBool( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetBool( *sectionName, *variableName, value, GEngineIni );
-	}
-	return value;
-}
-
-int32 UPPKLibraryMath::GetConfigInt( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return 0;
-
-	int32 value = 0;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetInt( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetInt( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetInt( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetInt( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetInt( *sectionName, *variableName, value, GEngineIni );
-	}
-	return value;
-}
-
-float UPPKLibraryMath::GetConfigFloat( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return 0;
-
-	float value = 0.0f;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetFloat( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetFloat( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetFloat( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetFloat( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetFloat( *sectionName, *variableName, value, GEngineIni );
-	}
-	return value;
-}
-
-FVector UPPKLibraryMath::GetConfigVector( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return FVector::ZeroVector;
-
-	FVector value = FVector::ZeroVector;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetVector( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetVector( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetVector( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetVector( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetVector( *sectionName, *variableName, value, GEngineIni );
-	}
-	return value;
-}
-
-FRotator UPPKLibraryMath::GetConfigRotator( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return FRotator::ZeroRotator;
-
-	FRotator value = FRotator::ZeroRotator;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetRotator( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetRotator( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetRotator( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetRotator( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetRotator( *sectionName, *variableName, value, GEngineIni );
-	}
-	return value;
-}
-
-FLinearColor UPPKLibraryMath::GetConfigColor( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return FColor::Black;
-
-	FColor value = FColor::Black;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetColor( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetColor( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetColor( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetColor( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetColor( *sectionName, *variableName, value, GEngineIni );
-	}
-	return FLinearColor( value );
-}
-
-FString UPPKLibraryMath::GetConfigString( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return "";
-
-	FString value = "";
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetString( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetString( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetString( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetString( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetString( *sectionName, *variableName, value, GEngineIni );
-	}
-	return value;
-}
-
-FVector2D UPPKLibraryMath::GetConfigVector2D( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return FVector2D::ZeroVector;
-
-	FVector2D value = FVector2D::ZeroVector;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetVector2D( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetVector2D( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetVector2D( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetVector2D( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetVector2D( *sectionName, *variableName, value, GEngineIni );
-	}
-	return FVector2D( value.X, value.Y );
-}
-
-void UPPKLibraryMath::SetConfigBool( const FString sectionName, const FString variableName, const bool value, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetBool( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetBool( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetBool( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetBool( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetBool( *sectionName, *variableName, value, GEngineIni );
-	}
-
-}
-
-void UPPKLibraryMath::SetConfigInt( const FString sectionName, const FString variableName, const int32 value, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return;
-
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetInt( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetInt( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetInt( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetInt( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetInt( *sectionName, *variableName, value, GEngineIni );
-	}
-}
-
-void UPPKLibraryMath::SetConfigFloat( const FString sectionName, const FString variableName, const float value, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return;
-
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetFloat( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetFloat( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetFloat( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetFloat( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetFloat( *sectionName, *variableName, value, GEngineIni );
-	}
-}
-
-void UPPKLibraryMath::SetConfigVector( const FString sectionName, const FString variableName, const FVector value, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return;
-
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetVector( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetVector( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetVector( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetVector( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetVector( *sectionName, *variableName, value, GEngineIni );
-	}
-}
-
-void UPPKLibraryMath::SetConfigRotator( const FString sectionName, const FString variableName, const FRotator value, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return;
-
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetRotator( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetRotator( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetRotator( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetRotator( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetRotator( *sectionName, *variableName, value, GEngineIni );
-	}
-}
-
-void UPPKLibraryMath::SetConfigColor( const FString sectionName, const FString variableName, const FLinearColor value, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return;
-
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetColor( *sectionName, *variableName, value.ToFColor( true ), GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetColor( *sectionName, *variableName, value.ToFColor( true ), GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetColor( *sectionName, *variableName, value.ToFColor( true ), GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetColor( *sectionName, *variableName, value.ToFColor( true ), GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetColor( *sectionName, *variableName, value.ToFColor( true ), GEngineIni );
-	}
-}
-
-void UPPKLibraryMath::SetConfigString( const FString sectionName, const FString variableName, const FString value, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return;
-
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetString( *sectionName, *variableName, *value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetString( *sectionName, *variableName, *value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetString( *sectionName, *variableName, *value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetString( *sectionName, *variableName, *value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetString( *sectionName, *variableName, *value, GEngineIni );
-	}
-}
-
-void UPPKLibraryMath::SetConfigVector2D( const FString sectionName, const FString variableName, const FVector2D value, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return;
-
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetVector2D( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetVector2D( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetVector2D( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetVector2D( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetVector2D( *sectionName, *variableName, value, GEngineIni );
-	}
 }
 
 uint8 UPPKLibraryMath::BMin( uint8 A, uint8 B ) {
