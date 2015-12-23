@@ -34,9 +34,12 @@ PPKLibraryTools.h
 
 #pragma once
 
+#include "PPKLibraryMath.h"
+
 #include <chrono>
 #include <random>
 #include <math.h>
+
 
 #include "PPKLibraryTools.generated.h"
 
@@ -211,13 +214,5 @@ public:
 	/** Set the value of the selected FVector2D from the selected ini config file */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
 		static void SetConfigVector2D( const FString sectionName, const FString variableName, const FVector2D value, const EIniFilesList iniFile );
-
-	/** Returns the number of characters in the int */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Integer Size" ), Category = "PP2KLibrary|Math|Utils" )
-		static int32 IntCount( const int32 intValue );
-
-	/** Returns the number of characters in the float */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Float Size" ), Category = "PP2KLibrary|Math|Utils" )
-		static int32 FloatCount( const float floatValue );
 
 };

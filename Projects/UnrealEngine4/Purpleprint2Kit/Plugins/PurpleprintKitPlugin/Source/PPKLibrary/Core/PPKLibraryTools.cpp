@@ -34,6 +34,7 @@ PPKLibraryTools.cpp
 
 #include "PPKLibraryPrivatePCH.h"
 #include "PPKLibraryTools.h"
+#include "PPKLibraryMath.h"
 
 #include <chrono>
 #include <random>
@@ -42,22 +43,10 @@ UPPKLibraryTools::UPPKLibraryTools( const class FObjectInitializer& ObjectInitia
 
 }
 
-int32 UPPKLibraryTools::IntCount( const int32 IntValue ) {
-	//return IntValue == 0 ? 1 : FMath::FloorToInt( log10( FMath::Abs( IntValue ) ) ) + 1;
-	FString numValue = FString::FromInt( IntValue );
-	return numValue.Len();
-}
-
-int32 UPPKLibraryTools::FloatCount( const float FloatValue ) {
-	//return IntValue == 0 ? 1 : FMath::FloorToInt( log10( FMath::Abs( IntValue ) ) ) + 1;
-	FString numValue = FString::SanitizeFloat( FloatValue );
-	return numValue.Len() - 1;
-}
-
 float UPPKLibraryTools::MakeFloatFromInts( const int32 A, const int32 B ) {
 	float value = A;
 	int32 m = 1;
-	for ( int32 i = 0; i <= IntCount( B ); ++i ) { m *= 10; }
+	for ( int32 i = 0; i <= UPPKLibraryMath::IntCount( B ); ++i ) { m *= 10; }
 	return value + ( B / m );
 }
 
@@ -70,7 +59,7 @@ float UPPKLibraryTools::InvertFloat( const float FloatValue ) {
 	int32 a = FMath::TruncToInt( FloatValue );
 	int32 b = FMath::Frac( FloatValue );
 	int32 m = 1;
-	for ( int32 i = 0; i <= IntCount( FloatValue ); ++i ) { m *= 10; }
+	for ( int32 i = 0; i <= UPPKLibraryMath::IntCount( FloatValue ); ++i ) { m *= 10; }
 	return b + ( a / m );
 }
 
