@@ -39,11 +39,10 @@ PPKLibraryTools.cpp
 #include <chrono>
 #include <random>
 
+
 UPPKLibraryTools::UPPKLibraryTools( const class FObjectInitializer& ObjectInitializer ) {
 
 }
-
-
 
 void UPPKLibraryTools::PrintByteArray( const TArray<uint8> ByteArray ) {
 	if ( ByteArray.Num() != 0 ) {
@@ -52,7 +51,6 @@ void UPPKLibraryTools::PrintByteArray( const TArray<uint8> ByteArray ) {
 		}
 	}
 }
-
 
 void UPPKLibraryTools::PrintIntArray( const TArray<int32> IntArray ) {
 	if ( IntArray.Num() != 0 ) {
@@ -80,7 +78,6 @@ void UPPKLibraryTools::PrintVector2DArray( const TArray<FVector2D> Vector2DArray
 	}
 }
 
-
 void UPPKLibraryTools::PrintVectorArray( const TArray<FVector> VectorArray ) {
 	if ( VectorArray.Num() != 0 ) {
 		for ( int32 i = 0; i < VectorArray.Num(); i++ ) {
@@ -91,7 +88,6 @@ void UPPKLibraryTools::PrintVectorArray( const TArray<FVector> VectorArray ) {
 		}
 	}
 }
-
 
 void UPPKLibraryTools::PrintVector4Array( const TArray<FVector4> Vector4Array ) {
 	if ( Vector4Array.Num() != 0 ) {
@@ -104,7 +100,6 @@ void UPPKLibraryTools::PrintVector4Array( const TArray<FVector4> Vector4Array ) 
 		}
 	}
 }
-
 
 void UPPKLibraryTools::PrintRotatorArray( const TArray<FRotator> RotatorArray ) {
 	if ( RotatorArray.Num() != 0 ) {

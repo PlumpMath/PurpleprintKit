@@ -50,7 +50,6 @@ private:
 protected:
 
 public:
-
 	//TODO Random functions
 
 	/** Build the random function seeds */
@@ -67,15 +66,19 @@ public:
 
 	static int32 FullRotSector( const float FloatValue, const int32 SectorsNumber );
 
+	/** Returns the sector index of the float using as reference the number of sectors */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
 		static uint8 FullRotSectorByte( const float FloatValue, const int32 SectorsNumber );
 
+	/** Returns the sector index of the float using as reference the number of sectors */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
 		static int32 FullRotSectorInt( const float FloatValue, const int32 SectorsNumber );
 
+	/** Returns the sector index of each FVector axis using as reference the number of sectors */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
 		static FVector FullRotSectorVector( const FVector VectorValue, const FVector SectorsNumber );
 
+	/** Returns the sector index of each FRotator axis using as reference the number of sectors */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
 		static FVector FullRotSectorRotator( const FRotator RotatorValue, const FVector SectorsNumber );
 
