@@ -63,6 +63,28 @@ protected:
 
 public:
 
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Int" )
+		static void PrintByteArray( const TArray<uint8> ByteArray );
+
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Int" )
+		static void PrintIntArray( const TArray<int32> IntArray );
+
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Int" )
+		static void PrintFloatArray( const TArray<float> FloatArray );
+
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Int" )
+		static void PrintVector2DArray( const TArray<FVector2D> Vector2DArray );
+
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Int" )
+		static void PrintVectorArray( const TArray<FVector> VectorArray );
+
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Int" )
+		static void PrintVector4Array( const TArray<FVector4> Vector4Array );
+
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Int" )
+		static void PrintRotatorArray( const TArray<FRotator> RotatorArray );
+
+
 	/** Returns a float from two ints A and B to A.B */
 	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Make Float" ), Category = "PP2KLibrary|Math|Float" )
 		static float MakeFloatFromInts( const int32 A, const int32 B );

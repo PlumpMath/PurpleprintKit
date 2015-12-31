@@ -43,6 +43,80 @@ UPPKLibraryTools::UPPKLibraryTools( const class FObjectInitializer& ObjectInitia
 
 }
 
+
+
+void UPPKLibraryTools::PrintByteArray( const TArray<uint8> ByteArray ) {
+	if ( ByteArray.Num() != 0 ) {
+		for ( int32 i = 0; i < ByteArray.Num(); i++ ) {
+			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, FString::FromInt( ByteArray[i] ) );
+		}
+	}
+}
+
+
+void UPPKLibraryTools::PrintIntArray( const TArray<int32> IntArray ) {
+	if ( IntArray.Num() != 0 ) {
+		for ( int32 i = 0; i < IntArray.Num(); i++ ) {
+			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, FString::FromInt( IntArray[i] ) );
+		}
+	}
+}
+
+void UPPKLibraryTools::PrintFloatArray( const TArray<float> FloatArray ) {
+	if ( FloatArray.Num() != 0 ) {
+		for ( int32 i = 0; i < FloatArray.Num(); i++ ) {
+			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, FString::SanitizeFloat( FloatArray[i] ) );
+		}
+	}
+}
+
+void UPPKLibraryTools::PrintVector2DArray( const TArray<FVector2D> Vector2DArray ) {
+	if ( Vector2DArray.Num() != 0 ) {
+		for ( int32 i = 0; i < Vector2DArray.Num(); i++ ) {
+			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, "( " + 
+											  FString::SanitizeFloat( Vector2DArray[i].X ) + " , " + 
+											  FString::SanitizeFloat( Vector2DArray[i].Y ) + " )" );
+		}
+	}
+}
+
+
+void UPPKLibraryTools::PrintVectorArray( const TArray<FVector> VectorArray ) {
+	if ( VectorArray.Num() != 0 ) {
+		for ( int32 i = 0; i < VectorArray.Num(); i++ ) {
+			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, "( " + 
+											  FString::SanitizeFloat( VectorArray[i].X ) + " , " + 
+											  FString::SanitizeFloat( VectorArray[i].Y ) + " , " + 
+											  FString::SanitizeFloat( VectorArray[i].Z ) + " )" );
+		}
+	}
+}
+
+
+void UPPKLibraryTools::PrintVector4Array( const TArray<FVector4> Vector4Array ) {
+	if ( Vector4Array.Num() != 0 ) {
+		for ( int32 i = 0; i < Vector4Array.Num(); i++ ) {
+			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, "( " +
+											  FString::SanitizeFloat( Vector4Array[i].X ) + " , " +
+											  FString::SanitizeFloat( Vector4Array[i].Y ) + " , " +
+											  FString::SanitizeFloat( Vector4Array[i].Z ) + " , " +
+											  FString::SanitizeFloat( Vector4Array[i].W ) + " )" );
+		}
+	}
+}
+
+
+void UPPKLibraryTools::PrintRotatorArray( const TArray<FRotator> RotatorArray ) {
+	if ( RotatorArray.Num() != 0 ) {
+		for ( int32 i = 0; i < RotatorArray.Num(); i++ ) {
+			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, "( " +
+											  FString::SanitizeFloat( RotatorArray[i].Pitch ) + " , " +
+											  FString::SanitizeFloat( RotatorArray[i].Roll ) + " , " +
+											  FString::SanitizeFloat( RotatorArray[i].Yaw ) + " )" );
+		}
+	}
+}
+
 float UPPKLibraryTools::MakeFloatFromInts( const int32 A, const int32 B ) {
 	float value = A;
 	int32 m = 1;
