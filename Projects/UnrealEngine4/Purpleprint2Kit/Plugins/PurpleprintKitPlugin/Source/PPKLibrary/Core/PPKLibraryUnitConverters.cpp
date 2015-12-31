@@ -38,6 +38,7 @@ PPKLibraryUnitConverters.cpp
 #include <chrono>
 #include <random>
 
+
 UPPKLibraryUnitConverters::UPPKLibraryUnitConverters( const class FObjectInitializer& ObjectInitializer ) {
 
 }
@@ -595,25 +596,25 @@ float UPPKLibraryUnitConverters::GetAreaUnitValue( const EAreaUnitsList AreaUnit
 			return 1.f;
 			break;
 		case EAreaUnitsList::AUSMetre:
-			return 1.f;
+			return 1e+6f;
 			break;
 		case EAreaUnitsList::AUSMile:
-			return 1.f;
+			return 0.386102f;
 			break;
 		case EAreaUnitsList::AUSYard:
-			return 1.f;
+			return 1.196e+6f;
 			break;
 		case EAreaUnitsList::AUSFoot:
-			return 1.f;
+			return 1.076e+7f;
 			break;
 		case EAreaUnitsList::AUSInch:
-			return 1.f;
+			return 1.55e+9f;
 			break;
 		case EAreaUnitsList::AUHectare:
-			return 1.f;
+			return 100.f;
 			break;
 		case EAreaUnitsList::AUAcre:
-			return 1.f;
+			return 247.105f;
 			break;
 	}
 	return 1.f;
@@ -622,43 +623,43 @@ float UPPKLibraryUnitConverters::GetAreaUnitValue( const EAreaUnitsList AreaUnit
 float UPPKLibraryUnitConverters::GetDTRUnitValue( const EDTRUnitsList DTRUnit ) {
 	switch ( DTRUnit ) {
 		case EDTRUnitsList::DTRUBitPS:
-			return 1.f;
+			return 8e+6f;
 			break;
 		case EDTRUnitsList::DTRUKilobitPS:
-			return 1.f;
+			return 8000.f;
 			break;
 		case EDTRUnitsList::DTRUKilobytePS:
-			return 1.f;
+			return 1000.f;
 			break;
 		case EDTRUnitsList::DTRUKibibitPS:
-			return 1.f;
+			return 7812.5f;
 			break;
 		case EDTRUnitsList::DTRUMegabitPS:
-			return 1.f;
+			return 8.f;
 			break;
 		case EDTRUnitsList::DTRUMegabytePS:
 			return 1.f;
 			break;
 		case EDTRUnitsList::DTRUMebibitPS:
-			return 1.f;
+			return 7.62939f;
 			break;
 		case EDTRUnitsList::DTRUGigabitPS:
-			return 1.f;
+			return 0.008f;
 			break;
 		case EDTRUnitsList::DTRUGigabytePS:
-			return 1.f;
+			return 0.001f;
 			break;
 		case EDTRUnitsList::DTRUGibibitPS:
-			return 1.f;
+			return 0.00745058f;
 			break;
 		case EDTRUnitsList::DTRUTerabitPS:
-			return 1.f;
+			return 8e-6f;
 			break;
 		case EDTRUnitsList::DTRUTerabytePS:
-			return 1.f;
+			return 1e-6f;
 			break;
 		case EDTRUnitsList::DTRUTebibitPS:
-			return 1.f;
+			return 7.276e-6f;
 			break;
 	}
 	return 1.f;
@@ -667,70 +668,70 @@ float UPPKLibraryUnitConverters::GetDTRUnitValue( const EDTRUnitsList DTRUnit ) 
 float UPPKLibraryUnitConverters::GetDSUnitValue( const EDSUnitsList DSUnit ) {
 	switch ( DSUnit ) {
 		case EDSUnitsList::DSUBit:
-			return 1.f;
+			return 8e+6f;
 			break;
 		case EDSUnitsList::DSUKilobit:
-			return 1.f;
+			return 8000.f;
 			break;
 		case EDSUnitsList::DSUKibibit:
-			return 1.f;
+			return 7812.5f;
 			break;
 		case EDSUnitsList::DSUMegabit:
-			return 1.f;
+			return 8.f;
 			break;
 		case EDSUnitsList::DSUMebibit:
-			return 1.f;
+			return 7.62939f;
 			break;
 		case EDSUnitsList::DSUGigabit:
-			return 1.f;
+			return 0.008f;
 			break;
 		case EDSUnitsList::DSUGibibit:
-			return 1.f;
+			return 0.00745058f;
 			break;
 		case EDSUnitsList::DSUTerabit:
-			return 1.f;
+			return 8e-6f;
 			break;
 		case EDSUnitsList::DSUTebibit:
-			return 1.f;
+			return 7.276e-6f;
 			break;
 		case EDSUnitsList::DSUPetabit:
-			return 1.f;
+			return 8e-9f;
 			break;
 		case EDSUnitsList::DSUPebibit:
-			return 1.f;
+			return 7.1054e-9f;
 			break;
 		case EDSUnitsList::DSUByte:
-			return 1.f;
+			return 1e+6f;
 			break;
 		case EDSUnitsList::DSUKilobyte:
-			return 1.f;
+			return 1000.f;
 			break;
 		case EDSUnitsList::DSUKibibyte:
-			return 1.f;
+			return 976.563f;
 			break;
 		case EDSUnitsList::DSUMegabyte:
 			return 1.f;
 			break;
 		case EDSUnitsList::DSUMebibyte:
-			return 1.f;
+			return 0.953674f;
 			break;
 		case EDSUnitsList::DSUGigabyte:
-			return 1.f;
+			return 0.001f;
 			break;
 		case EDSUnitsList::DSUGibibyte:
-			return 1.f;
+			return 0.000931323f;
 			break;
 		case EDSUnitsList::DSUTerabyte:
-			return 1.f;
+			return 1e-6f;
 			break;
 		case EDSUnitsList::DSUTebibyte:
-			return 1.f;
+			return 9.0949e-7f;
 			break;
 		case EDSUnitsList::DSUPetabyte:
-			return 1.f;
+			return 1e-9f;
 			break;
 		case EDSUnitsList::DSUPebibyte:
-			return 1.f;
+			return 8.8818e-10f;
 			break;
 	}
 	return 1.f;
@@ -742,13 +743,13 @@ float UPPKLibraryUnitConverters::GetFrequencyUnitValue( const EFrequencyUnitsLis
 			return 1.f;
 			break;
 		case EFrequencyUnitsList::FUKilohertz:
-			return 1.f;
+			return 0.001f;
 			break;
 		case EFrequencyUnitsList::FUMegahertz:
-			return 1.f;
+			return 1e-6f;
 			break;
 		case EFrequencyUnitsList::FUGigahertz:
-			return 1.f;
+			return 1e-9f;
 			break;
 	}
 	return 1.f;
@@ -757,37 +758,37 @@ float UPPKLibraryUnitConverters::GetFrequencyUnitValue( const EFrequencyUnitsLis
 float UPPKLibraryUnitConverters::GetLenghtUnitValue( const ELenghtUnitsList LenghtUnit ) {
 	switch ( LenghtUnit ) {
 		case ELenghtUnitsList::LUKilometre:
-			return 1.f;
+			return 0.001f;
 			break;
 		case ELenghtUnitsList::LUMetre:
 			return 1.f;
 			break;
 		case ELenghtUnitsList::LUCentimetre:
-			return 1.f;
+			return 100.f;
 			break;
 		case ELenghtUnitsList::LUMillimetre:
-			return 1.f;
+			return 1000.f;
 			break;
 		case ELenghtUnitsList::LUMicrometre:
-			return 1.f;
+			return 1e+6f;
 			break;
 		case ELenghtUnitsList::LUNanometre:
-			return 1.f;
+			return 1e+9f;
 			break;
 		case ELenghtUnitsList::LUMile:
-			return 1.f;
+			return 0.000621371f;
 			break;
 		case ELenghtUnitsList::LUYard:
-			return 1.f;
+			return 1.09361f;
 			break;
 		case ELenghtUnitsList::LUFoot:
-			return 1.f;
+			return 3.28084f;
 			break;
 		case ELenghtUnitsList::LUInch:
-			return 1.f;
+			return 39.3701f;
 			break;
 		case ELenghtUnitsList::LUNauticalMile:
-			return 1.f;
+			return 0.000539957f;
 			break;
 	}
 	return 1.f;
@@ -796,34 +797,34 @@ float UPPKLibraryUnitConverters::GetLenghtUnitValue( const ELenghtUnitsList Leng
 float UPPKLibraryUnitConverters::GetMassUnitValue( const EMassUnitsList MassUnit ) {
 	switch ( MassUnit ) {
 		case EMassUnitsList::MUTonne:
-			return 1.f;
+			return 0.001f;
 			break;
 		case EMassUnitsList::MUKilogram:
 			return 1.f;
 			break;
 		case EMassUnitsList::MUGram:
-			return 1.f;
+			return 1000.f;
 			break;
 		case EMassUnitsList::MUMilligram:
-			return 1.f;
+			return 1e+6f;
 			break;
 		case EMassUnitsList::MUMicrogram:
-			return 1.f;
+			return 1e+9f;
 			break;
 		case EMassUnitsList::MUImperialTon:
-			return 1.f;
+			return 0.000984207f;
 			break;
 		case EMassUnitsList::MUUSTon:
-			return 1.f;
+			return 0.00110231183999997618f;
 			break;
 		case EMassUnitsList::MUStone:
-			return 1.f;
+			return 0.15747311999999660803f;
 			break;
 		case EMassUnitsList::MUPound:
-			return 1.f;
+			return 2.204623679999952568f;
 			break;
 		case EMassUnitsList::MUOunce:
-			return 1.f;
+			return 35.273978879999241087f;
 			break;
 	}
 	return 1.f;
@@ -832,22 +833,22 @@ float UPPKLibraryUnitConverters::GetMassUnitValue( const EMassUnitsList MassUnit
 float UPPKLibraryUnitConverters::GetPAUnitValue( const EPAUnitsList PAUnit ) {
 	switch ( PAUnit ) {
 		case EPAUnitsList::PAUAngularMil:
-			return 1.f;
+			return 98.696f;
 			break;
 		case EPAUnitsList::PAUDegree:
-			return 1.f;
+			return 0.9f;
 			break;
 		case EPAUnitsList::PAUGradian:
 			return 1.f;
 			break;
 		case EPAUnitsList::PAUMinuteOfArc:
-			return 1.f;
+			return 54.f;
 			break;
 		case EPAUnitsList::PAURadian:
-			return 1.f;
+			return 0.015708f;
 			break;
 		case EPAUnitsList::PAUSecondOfArc:
-			return 1.f;
+			return 3240.f;
 			break;
 	}
 	return 1.f;
@@ -856,19 +857,19 @@ float UPPKLibraryUnitConverters::GetPAUnitValue( const EPAUnitsList PAUnit ) {
 float UPPKLibraryUnitConverters::GetSpeedUnitValue( const ESpeedUnitsList SpeedUnit ) {
 	switch ( SpeedUnit ) {
 		case ESpeedUnitsList::SUMilesPH:
-			return 1.f;
+			return 2.23694f;
 			break;
 		case ESpeedUnitsList::SUFootPS:
-			return 1.f;
+			return 3.28084f;
 			break;
 		case ESpeedUnitsList::SUMetrePS:
 			return 1.f;
 			break;
 		case ESpeedUnitsList::SUKilometrePH:
-			return 1.f;
+			return 3.6f;
 			break;
 		case ESpeedUnitsList::SUKnot:
-			return 1.f;
+			return 1.94384f;
 			break;
 	}
 	return 1.f;
@@ -880,10 +881,10 @@ float UPPKLibraryUnitConverters::GetTempUnitValue( const ETempUnitsList TempUnit
 			return 1.f;
 			break;
 		case ETempUnitsList::TUFahrenheit:
-			return 1.f;
+			return 33.8f;
 			break;
 		case ETempUnitsList::TUKelvin:
-			return 1.f;
+			return 274.15f;
 			break;
 	}
 	return 1.f;
@@ -934,61 +935,61 @@ float UPPKLibraryUnitConverters::GetTimeUnitValue( const ETimeUnitsList TimeUnit
 float UPPKLibraryUnitConverters::GetVolUnitValue( const EVolUnitsList VolUnit ) {
 	switch ( VolUnit ) {
 		case EVolUnitsList::VUUSLiquidGallon:
-			return 1.f;
+			return 0.264172f;
 			break;
 		case EVolUnitsList::VUUSLiquidQuart:
-			return 1.f;
+			return 1.05669f;
 			break;
 		case EVolUnitsList::VUUSLiquidPint:
-			return 1.f;
+			return 2.11338f;
 			break;
 		case EVolUnitsList::VUUSLegalCup:
-			return 1.f;
+			return 4.16667f;
 			break;
 		case EVolUnitsList::VUUSFluidOunce:
-			return 1.f;
+			return 33.814f;
 			break;
 		case EVolUnitsList::VUUSTablespoon:
-			return 1.f;
+			return 67.628f;
 			break;
 		case EVolUnitsList::VUUSTeaspoon:
-			return 1.f;
+			return 202.884f;
 			break;
 		case EVolUnitsList::VUCubicMetre:
-			return 1.f;
+			return 0.001f;
 			break;
 		case EVolUnitsList::VULitre:
 			return 1.f;
 			break;
 		case EVolUnitsList::VUMillilitre:
-			return 1.f;
+			return ( 1.f * 1000.f );
 			break;
 		case EVolUnitsList::VUImperialGallon:
-			return 1.f;
+			return 0.219969f;
 			break;
 		case EVolUnitsList::VUImperialQuart:
-			return 1.f;
+			return 0.879876f;
 			break;
 		case EVolUnitsList::VUImperialPint:
-			return 1.f;
+			return 1.759752f;
 			break;
 		case EVolUnitsList::VUImperialCup:
-			return 1.f;
+			return 3.519504309673087f;
 			break;
 		case EVolUnitsList::VUImperialFluidOunce:
-			return 1.f;
+			return 35.19503999999999877f;
 			break;
 		case EVolUnitsList::VUImperialTablespoon:
-			return 1.f;
+			return 56.312040732414601507f;
 			break;
 		case EVolUnitsList::VUImperialTeaspoon:
-			return 1.f;
+			return 168.93612218773066047f;
 			break;
 		case EVolUnitsList::VUCubicFoot:
-			return 1.f;
+			return 0.03531462685864594081f;
 			break;
 		case EVolUnitsList::VUCubicInch:
-			return 1.f;
+			return 61.023675211740190605f;
 			break;
 	}
 	return 1.f;
