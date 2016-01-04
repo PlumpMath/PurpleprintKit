@@ -43,15 +43,18 @@ UPPKLibraryUnitConverters::UPPKLibraryUnitConverters( const class FObjectInitial
 
 }
 
-float UPPKLibraryUnitConverters::AreaUnitsConverterSimple( const float UnitValue, const EAreaUnitsList UnitFrom, const EAreaUnitsList UnitTo, const bool bTruncate ) {
+float UPPKLibraryUnitConverters::AreaUnitsConverterSimple( const float UnitValue, const EAreaUnitsList UnitFrom, 
+														   const EAreaUnitsList UnitTo, const bool bTruncate ) {
 	if ( bTruncate ) {
 		return FMath::TruncToInt( ( UnitValue / GetAreaUnitValue( UnitFrom ) ) * GetAreaUnitValue( UnitTo ) );
 	}
 	return ( UnitValue / GetAreaUnitValue( UnitFrom ) ) * GetAreaUnitValue( UnitTo );
 }
 
-void UPPKLibraryUnitConverters::AreaUnitsConverterAdvanced( const float UnitValue, const EAreaUnitsList UnitFrom, const EAreaUnitsList UnitToValueA, const EAreaUnitsList UnitToValueB,
-												  const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, float& UnitValueATo, float& UnitValueBTo ) {
+void UPPKLibraryUnitConverters::AreaUnitsConverterAdvanced( const float UnitValue, const EAreaUnitsList UnitFrom, 
+															const EAreaUnitsList UnitToValueA, const EAreaUnitsList UnitToValueB,
+															const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, 
+															float& UnitValueATo, float& UnitValueBTo ) {
 	UnitValueOriginal = UnitValue;
 	if ( !bTruncateA ) {
 		UnitValueATo = ( UnitValue / GetAreaUnitValue( UnitFrom ) ) * GetAreaUnitValue( UnitToValueA );
@@ -66,7 +69,8 @@ void UPPKLibraryUnitConverters::AreaUnitsConverterAdvanced( const float UnitValu
 	}
 }
 
-void UPPKLibraryUnitConverters::AreaUnitsConverterComplete( const float UnitValue, const EAreaUnitsList UnitFrom, const bool bTruncate, FAreaUnitsStruct& UnitList ) {
+void UPPKLibraryUnitConverters::AreaUnitsConverterComplete( const float UnitValue, const EAreaUnitsList UnitFrom, const bool bTruncate, 
+															FAreaUnitsStruct& UnitList ) {
 	if ( !bTruncate ) {
 		UnitList.USKilometre = ( UnitValue / GetAreaUnitValue( UnitFrom ) ) * GetAreaUnitValue( EAreaUnitsList::AUSKilometre );
 		UnitList.USMetre = ( UnitValue / GetAreaUnitValue( UnitFrom ) ) * GetAreaUnitValue( EAreaUnitsList::AUSMetre );
@@ -88,15 +92,18 @@ void UPPKLibraryUnitConverters::AreaUnitsConverterComplete( const float UnitValu
 	}
 }
 
-float UPPKLibraryUnitConverters::DTRUnitsConverterSimple( const float UnitValue, const EDTRUnitsList UnitFrom, const EDTRUnitsList UnitTo, const bool bTruncate ) {
+float UPPKLibraryUnitConverters::DTRUnitsConverterSimple( const float UnitValue, const EDTRUnitsList UnitFrom, 
+														  const EDTRUnitsList UnitTo, const bool bTruncate ) {
 	if ( bTruncate ) {
 		return FMath::TruncToInt( ( UnitValue / GetDTRUnitValue( UnitFrom ) ) * GetDTRUnitValue( UnitTo ) );
 	}
 	return ( UnitValue / GetDTRUnitValue( UnitFrom ) ) * GetDTRUnitValue( UnitTo );
 }
 
-void UPPKLibraryUnitConverters::DTRUnitsConverterAdvanced( const float UnitValue, const EDTRUnitsList UnitFrom, const EDTRUnitsList UnitToValueA, const EDTRUnitsList UnitToValueB,
-												  const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, float& UnitValueATo, float& UnitValueBTo ) {
+void UPPKLibraryUnitConverters::DTRUnitsConverterAdvanced( const float UnitValue, const EDTRUnitsList UnitFrom, 
+														   const EDTRUnitsList UnitToValueA, const EDTRUnitsList UnitToValueB,
+														   const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, 
+														   float& UnitValueATo, float& UnitValueBTo ) {
 	UnitValueOriginal = UnitValue;
 	if ( !bTruncateA ) {
 		UnitValueATo = ( UnitValue / GetDTRUnitValue( UnitFrom ) ) * GetDTRUnitValue( UnitToValueA );
@@ -111,7 +118,8 @@ void UPPKLibraryUnitConverters::DTRUnitsConverterAdvanced( const float UnitValue
 	}
 }
 
-void UPPKLibraryUnitConverters::DTRUnitsConverterComplete( const float UnitValue, const EDTRUnitsList UnitFrom, const bool bTruncate, FDTRUnitsStruct& UnitList ) {
+void UPPKLibraryUnitConverters::DTRUnitsConverterComplete( const float UnitValue, const EDTRUnitsList UnitFrom, 
+														   const bool bTruncate, FDTRUnitsStruct& UnitList ) {
 	if ( !bTruncate ) {
 		UnitList.UBitPS = ( UnitValue / GetDTRUnitValue( UnitFrom ) ) * GetDTRUnitValue( EDTRUnitsList::DTRUBitPS );
 		UnitList.UKilobitPS = ( UnitValue / GetDTRUnitValue( UnitFrom ) ) * GetDTRUnitValue( EDTRUnitsList::DTRUKilobitPS );
@@ -143,15 +151,18 @@ void UPPKLibraryUnitConverters::DTRUnitsConverterComplete( const float UnitValue
 	}
 }
 
-float UPPKLibraryUnitConverters::DSUnitsConverterSimple( const float UnitValue, const EDSUnitsList UnitFrom, const EDSUnitsList UnitTo, const bool bTruncate ) {
+float UPPKLibraryUnitConverters::DSUnitsConverterSimple( const float UnitValue, const EDSUnitsList UnitFrom, const EDSUnitsList UnitTo, 
+														 const bool bTruncate ) {
 	if ( bTruncate ) {
 		return FMath::TruncToInt( ( UnitValue / GetDSUnitValue( UnitFrom ) ) * GetDSUnitValue( UnitTo ) );
 	}
 	return ( UnitValue / GetDSUnitValue( UnitFrom ) ) * GetDSUnitValue( UnitTo );
 }
 
-void UPPKLibraryUnitConverters::DSUnitsConverterAdvanced( const float UnitValue, const EDSUnitsList UnitFrom, const EDSUnitsList UnitToValueA, const EDSUnitsList UnitToValueB,
-												 const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, float& UnitValueATo, float& UnitValueBTo ) {
+void UPPKLibraryUnitConverters::DSUnitsConverterAdvanced( const float UnitValue, const EDSUnitsList UnitFrom, 
+														  const EDSUnitsList UnitToValueA, const EDSUnitsList UnitToValueB,
+														  const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, 
+														  float& UnitValueATo, float& UnitValueBTo ) {
 	UnitValueOriginal = UnitValue;
 	if ( !bTruncateA ) {
 		UnitValueATo = ( UnitValue / GetDSUnitValue( UnitFrom ) ) * GetDSUnitValue( UnitToValueA );
@@ -166,7 +177,8 @@ void UPPKLibraryUnitConverters::DSUnitsConverterAdvanced( const float UnitValue,
 	}
 }
 
-void UPPKLibraryUnitConverters::DSUnitsConverterComplete( const float UnitValue, const EDSUnitsList UnitFrom, const bool bTruncate, FDSUnitsStruct& UnitList ) {
+void UPPKLibraryUnitConverters::DSUnitsConverterComplete( const float UnitValue, const EDSUnitsList UnitFrom, const bool bTruncate, 
+														  FDSUnitsStruct& UnitList ) {
 	if ( !bTruncate ) {
 		UnitList.UBit = ( UnitValue / GetDSUnitValue( UnitFrom ) ) * GetDSUnitValue( EDSUnitsList::DSUBit );
 		UnitList.UKilobit = ( UnitValue / GetDSUnitValue( UnitFrom ) ) * GetDSUnitValue( EDSUnitsList::DSUKilobit );
@@ -216,15 +228,19 @@ void UPPKLibraryUnitConverters::DSUnitsConverterComplete( const float UnitValue,
 	}
 }
 
-float UPPKLibraryUnitConverters::FrequencyUnitsConverterSimple( const float UnitValue, const EFrequencyUnitsList UnitFrom, const EFrequencyUnitsList UnitTo, const bool bTruncate ) {
+float UPPKLibraryUnitConverters::FrequencyUnitsConverterSimple( const float UnitValue, const EFrequencyUnitsList UnitFrom, 
+																const EFrequencyUnitsList UnitTo, const bool bTruncate ) {
 	if ( bTruncate ) {
 		return FMath::TruncToInt( ( UnitValue / GetFrequencyUnitValue( UnitFrom ) ) * GetFrequencyUnitValue( UnitTo ) );
 	}
 	return ( UnitValue / GetFrequencyUnitValue( UnitFrom ) ) * GetFrequencyUnitValue( UnitTo );
 }
 
-void UPPKLibraryUnitConverters::FrequencyUnitsConverterAdvanced( const float UnitValue, const EFrequencyUnitsList UnitFrom, const EFrequencyUnitsList UnitToValueA, const EFrequencyUnitsList UnitToValueB,
-												 const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, float& UnitValueATo, float& UnitValueBTo ) {
+void UPPKLibraryUnitConverters::FrequencyUnitsConverterAdvanced( const float UnitValue, const EFrequencyUnitsList UnitFrom, 
+																 const EFrequencyUnitsList UnitToValueA, 
+																 const EFrequencyUnitsList UnitToValueB,
+																 const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal,
+																 float& UnitValueATo, float& UnitValueBTo ) {
 	UnitValueOriginal = UnitValue;
 	if ( !bTruncateA ) {
 		UnitValueATo = ( UnitValue / GetFrequencyUnitValue( UnitFrom ) ) * GetFrequencyUnitValue( UnitToValueA );
@@ -239,7 +255,8 @@ void UPPKLibraryUnitConverters::FrequencyUnitsConverterAdvanced( const float Uni
 	}
 }
 
-void UPPKLibraryUnitConverters::FrequencyUnitsConverterComplete( const float UnitValue, const EFrequencyUnitsList UnitFrom, const bool bTruncate, FFrequencyUnitsStruct& UnitList ) {
+void UPPKLibraryUnitConverters::FrequencyUnitsConverterComplete( const float UnitValue, const EFrequencyUnitsList UnitFrom, 
+																 const bool bTruncate, FFrequencyUnitsStruct& UnitList ) {
 	if ( !bTruncate ) {
 		UnitList.UHertz = ( UnitValue / GetFrequencyUnitValue( UnitFrom ) ) * GetFrequencyUnitValue( EFrequencyUnitsList::FUHertz );
 		UnitList.UKilohertz = ( UnitValue / GetFrequencyUnitValue( UnitFrom ) ) * GetFrequencyUnitValue( EFrequencyUnitsList::FUKilohertz );
@@ -253,66 +270,73 @@ void UPPKLibraryUnitConverters::FrequencyUnitsConverterComplete( const float Uni
 	}
 }
 
-float UPPKLibraryUnitConverters::LenghtUnitsConverterSimple( const float UnitValue, const ELenghtUnitsList UnitFrom, const ELenghtUnitsList UnitTo, const bool bTruncate ) {
+float UPPKLibraryUnitConverters::LengthUnitsConverterSimple( const float UnitValue, const ELengthUnitsList UnitFrom, 
+															 const ELengthUnitsList UnitTo, const bool bTruncate ) {
 	if ( bTruncate ) {
-		return FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( UnitTo ) );
+		return FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( UnitTo ) );
 	}
-	return ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( UnitTo );
+	return ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( UnitTo );
 }
 
-void UPPKLibraryUnitConverters::LenghtUnitsConverterAdvanced( const float UnitValue, const ELenghtUnitsList UnitFrom, const ELenghtUnitsList UnitToValueA, const ELenghtUnitsList UnitToValueB,
-													   const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, float& UnitValueATo, float& UnitValueBTo ) {
+void UPPKLibraryUnitConverters::LengthUnitsConverterAdvanced( const float UnitValue, const ELengthUnitsList UnitFrom, 
+															  const ELengthUnitsList UnitToValueA, const ELengthUnitsList UnitToValueB,
+														      const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, 
+															  float& UnitValueATo, float& UnitValueBTo ) {
 	UnitValueOriginal = UnitValue;
 	if ( !bTruncateA ) {
-		UnitValueATo = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( UnitToValueA );
+		UnitValueATo = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( UnitToValueA );
 	} else {
-		UnitValueATo = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( UnitToValueA ) );
+		UnitValueATo = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( UnitToValueA ) );
 	}
 
 	if ( !bTruncateB ) {
-		UnitValueBTo = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( UnitToValueB );
+		UnitValueBTo = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( UnitToValueB );
 	} else {
-		UnitValueBTo = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( UnitToValueB ) );
+		UnitValueBTo = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( UnitToValueB ) );
 	}
 }
 
-void UPPKLibraryUnitConverters::LenghtUnitsConverterComplete( const float UnitValue, const ELenghtUnitsList UnitFrom, const bool bTruncate, FLenghtUnitsStruct& UnitList ) {
+void UPPKLibraryUnitConverters::LengthUnitsConverterComplete( const float UnitValue, const ELengthUnitsList UnitFrom, 
+															  const bool bTruncate, FLengthUnitsStruct& UnitList ) {
 	if ( !bTruncate ) {
-		UnitList.UKilometre = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUKilometre );
-		UnitList.UMetre = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUMetre );
-		UnitList.UCentimetre = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUCentimetre );
-		UnitList.UMillimetre = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUMillimetre );
-		UnitList.UMicrometre = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUMicrometre );
-		UnitList.UNanometre = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUNanometre );
-		UnitList.UMile = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUMile );
-		UnitList.UYard = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUYard );
-		UnitList.UFoot = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUFoot );
-		UnitList.UInch = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUInch );
-		UnitList.UNauticalMile = ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUNauticalMile );
+		UnitList.UKilometre = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUKilometre );
+		UnitList.UMetre = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUMetre );
+		UnitList.UCentimetre = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUCentimetre );
+		UnitList.UMillimetre = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUMillimetre );
+		UnitList.UMicrometre = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUMicrometre );
+		UnitList.UNanometre = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUNanometre );
+		UnitList.UMile = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUMile );
+		UnitList.UYard = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUYard );
+		UnitList.UFoot = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUFoot );
+		UnitList.UInch = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUInch );
+		UnitList.UNauticalMile = ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUNauticalMile );
 	} else {
-		UnitList.UKilometre = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUKilometre ) );
-		UnitList.UMetre = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUMetre ) );
-		UnitList.UCentimetre = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUCentimetre ) );
-		UnitList.UMillimetre = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUMillimetre ) );
-		UnitList.UMicrometre = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUMicrometre ) );
-		UnitList.UNanometre = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUNanometre ) );
-		UnitList.UMile = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUMile ) );
-		UnitList.UYard = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUYard ) );
-		UnitList.UFoot = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUFoot ) );
-		UnitList.UInch = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUInch ) );
-		UnitList.UNauticalMile = FMath::TruncToInt( ( UnitValue / GetLenghtUnitValue( UnitFrom ) ) * GetLenghtUnitValue( ELenghtUnitsList::LUNauticalMile ) );
+		UnitList.UKilometre = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUKilometre ) );
+		UnitList.UMetre = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUMetre ) );
+		UnitList.UCentimetre = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUCentimetre ) );
+		UnitList.UMillimetre = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUMillimetre ) );
+		UnitList.UMicrometre = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUMicrometre ) );
+		UnitList.UNanometre = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUNanometre ) );
+		UnitList.UMile = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUMile ) );
+		UnitList.UYard = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUYard ) );
+		UnitList.UFoot = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUFoot ) );
+		UnitList.UInch = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUInch ) );
+		UnitList.UNauticalMile = FMath::TruncToInt( ( UnitValue / GetLengthUnitValue( UnitFrom ) ) * GetLengthUnitValue( ELengthUnitsList::LUNauticalMile ) );
 	}
 }
 
-float UPPKLibraryUnitConverters::MassUnitsConverterSimple( const float UnitValue, const EMassUnitsList UnitFrom, const EMassUnitsList UnitTo, const bool bTruncate ) {
+float UPPKLibraryUnitConverters::MassUnitsConverterSimple( const float UnitValue, const EMassUnitsList UnitFrom, 
+														   const EMassUnitsList UnitTo, const bool bTruncate ) {
 	if ( bTruncate ) {
 		return FMath::TruncToInt( ( UnitValue / GetMassUnitValue( UnitFrom ) ) * GetMassUnitValue( UnitTo ) );
 	}
 	return ( UnitValue / GetMassUnitValue( UnitFrom ) ) * GetMassUnitValue( UnitTo );
 }
 
-void UPPKLibraryUnitConverters::MassUnitsConverterAdvanced( const float UnitValue, const EMassUnitsList UnitFrom, const EMassUnitsList UnitToValueA, const EMassUnitsList UnitToValueB,
-													   const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, float& UnitValueATo, float& UnitValueBTo ) {
+void UPPKLibraryUnitConverters::MassUnitsConverterAdvanced( const float UnitValue, const EMassUnitsList UnitFrom, 
+															const EMassUnitsList UnitToValueA, const EMassUnitsList UnitToValueB,
+															const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, 
+															float& UnitValueATo, float& UnitValueBTo ) {
 	UnitValueOriginal = UnitValue;
 	if ( !bTruncateA ) {
 		UnitValueATo = ( UnitValue / GetMassUnitValue( UnitFrom ) ) * GetMassUnitValue( UnitToValueA );
@@ -327,7 +351,8 @@ void UPPKLibraryUnitConverters::MassUnitsConverterAdvanced( const float UnitValu
 	}
 }
 
-void UPPKLibraryUnitConverters::MassUnitsConverterComplete( const float UnitValue, const EMassUnitsList UnitFrom, const bool bTruncate, FMassUnitsStruct& UnitList ) {
+void UPPKLibraryUnitConverters::MassUnitsConverterComplete( const float UnitValue, const EMassUnitsList UnitFrom, const bool bTruncate, 
+															FMassUnitsStruct& UnitList ) {
 	if ( !bTruncate ) {
 		UnitList.UTonne = ( UnitValue / GetMassUnitValue( UnitFrom ) ) * GetMassUnitValue( EMassUnitsList::MUTonne );
 		UnitList.UKilogram = ( UnitValue / GetMassUnitValue( UnitFrom ) ) * GetMassUnitValue( EMassUnitsList::MUKilogram );
@@ -353,15 +378,18 @@ void UPPKLibraryUnitConverters::MassUnitsConverterComplete( const float UnitValu
 	}
 }
 
-float UPPKLibraryUnitConverters::PAUnitsConverterSimple( const float UnitValue, const EPAUnitsList UnitFrom, const EPAUnitsList UnitTo, const bool bTruncate ) {
+float UPPKLibraryUnitConverters::PAUnitsConverterSimple( const float UnitValue, const EPAUnitsList UnitFrom, const EPAUnitsList UnitTo, 
+														 const bool bTruncate ) {
 	if ( bTruncate ) {
 		return FMath::TruncToInt( ( UnitValue / GetPAUnitValue( UnitFrom ) ) * GetPAUnitValue( UnitTo ) );
 	}
 	return ( UnitValue / GetPAUnitValue( UnitFrom ) ) * GetPAUnitValue( UnitTo );
 }
 
-void UPPKLibraryUnitConverters::PAUnitsConverterAdvanced( const float UnitValue, const EPAUnitsList UnitFrom, const EPAUnitsList UnitToValueA, const EPAUnitsList UnitToValueB,
-													   const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, float& UnitValueATo, float& UnitValueBTo ) {
+void UPPKLibraryUnitConverters::PAUnitsConverterAdvanced( const float UnitValue, const EPAUnitsList UnitFrom, 
+														  const EPAUnitsList UnitToValueA, const EPAUnitsList UnitToValueB,
+														  const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, 
+														  float& UnitValueATo, float& UnitValueBTo ) {
 	UnitValueOriginal = UnitValue;
 	if ( !bTruncateA ) {
 		UnitValueATo = ( UnitValue / GetPAUnitValue( UnitFrom ) ) * GetPAUnitValue( UnitToValueA );
@@ -376,7 +404,8 @@ void UPPKLibraryUnitConverters::PAUnitsConverterAdvanced( const float UnitValue,
 	}
 }
 
-void UPPKLibraryUnitConverters::PAUnitsConverterComplete( const float UnitValue, const EPAUnitsList UnitFrom, const bool bTruncate, FPAUnitsStruct& UnitList ) {
+void UPPKLibraryUnitConverters::PAUnitsConverterComplete( const float UnitValue, const EPAUnitsList UnitFrom, const bool bTruncate, 
+														  FPAUnitsStruct& UnitList ) {
 	if ( !bTruncate ) {
 		UnitList.UAngularMil = ( UnitValue / GetPAUnitValue( UnitFrom ) ) * GetPAUnitValue( EPAUnitsList::PAUAngularMil );
 		UnitList.UDegree =( UnitValue / GetPAUnitValue( UnitFrom ) ) * GetPAUnitValue( EPAUnitsList::PAUDegree );
@@ -394,15 +423,18 @@ void UPPKLibraryUnitConverters::PAUnitsConverterComplete( const float UnitValue,
 	}
 }
 
-float UPPKLibraryUnitConverters::SpeedUnitsConverterSimple( const float UnitValue, const ESpeedUnitsList UnitFrom, const ESpeedUnitsList UnitTo, const bool bTruncate ) {
+float UPPKLibraryUnitConverters::SpeedUnitsConverterSimple( const float UnitValue, const ESpeedUnitsList UnitFrom, 
+															const ESpeedUnitsList UnitTo, const bool bTruncate ) {
 	if ( bTruncate ) {
 		return FMath::TruncToInt( ( UnitValue / GetSpeedUnitValue( UnitFrom ) ) * GetSpeedUnitValue( UnitTo ) );
 	}
 	return ( UnitValue / GetSpeedUnitValue( UnitFrom ) ) * GetSpeedUnitValue( UnitTo );
 }
 
-void UPPKLibraryUnitConverters::SpeedUnitsConverterAdvanced( const float UnitValue, const ESpeedUnitsList UnitFrom, const ESpeedUnitsList UnitToValueA, const ESpeedUnitsList UnitToValueB,
-													   const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, float& UnitValueATo, float& UnitValueBTo ) {
+void UPPKLibraryUnitConverters::SpeedUnitsConverterAdvanced( const float UnitValue, const ESpeedUnitsList UnitFrom, 
+															 const ESpeedUnitsList UnitToValueA, const ESpeedUnitsList UnitToValueB,
+															 const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, 
+															 float& UnitValueATo, float& UnitValueBTo ) {
 	UnitValueOriginal = UnitValue;
 	if ( !bTruncateA ) {
 		UnitValueATo = ( UnitValue / GetSpeedUnitValue( UnitFrom ) ) * GetSpeedUnitValue( UnitToValueA );
@@ -417,7 +449,8 @@ void UPPKLibraryUnitConverters::SpeedUnitsConverterAdvanced( const float UnitVal
 	}
 }
 
-void UPPKLibraryUnitConverters::SpeedUnitsConverterComplete( const float UnitValue, const ESpeedUnitsList UnitFrom, const bool bTruncate, FSpeedUnitsStruct& UnitList ) {
+void UPPKLibraryUnitConverters::SpeedUnitsConverterComplete( const float UnitValue, const ESpeedUnitsList UnitFrom, const bool bTruncate, 
+															 FSpeedUnitsStruct& UnitList ) {
 	if ( !bTruncate ) {
 		UnitList.UMilesPH = ( UnitValue / GetSpeedUnitValue( UnitFrom ) ) * GetSpeedUnitValue( ESpeedUnitsList::SUMilesPH );
 		UnitList.UFootPS = ( UnitValue / GetSpeedUnitValue( UnitFrom ) ) * GetSpeedUnitValue( ESpeedUnitsList::SUFootPS );
@@ -433,15 +466,18 @@ void UPPKLibraryUnitConverters::SpeedUnitsConverterComplete( const float UnitVal
 	}
 }
 
-float UPPKLibraryUnitConverters::TempUnitsConverterSimple( const float UnitValue, const ETempUnitsList UnitFrom, const ETempUnitsList UnitTo, const bool bTruncate ) {
+float UPPKLibraryUnitConverters::TempUnitsConverterSimple( const float UnitValue, const ETempUnitsList UnitFrom, 
+														   const ETempUnitsList UnitTo, const bool bTruncate ) {
 	if ( bTruncate ) {
 		return FMath::TruncToInt( ( UnitValue / GetTempUnitValue( UnitFrom ) ) * GetTempUnitValue( UnitTo ) );
 	}
 	return ( UnitValue / GetTempUnitValue( UnitFrom ) ) * GetTempUnitValue( UnitTo );
 }
 
-void UPPKLibraryUnitConverters::TempUnitsConverterAdvanced( const float UnitValue, const ETempUnitsList UnitFrom, const ETempUnitsList UnitToValueA, const ETempUnitsList UnitToValueB,
-												   const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, float& UnitValueATo, float& UnitValueBTo ) {
+void UPPKLibraryUnitConverters::TempUnitsConverterAdvanced( const float UnitValue, const ETempUnitsList UnitFrom, 
+															const ETempUnitsList UnitToValueA, const ETempUnitsList UnitToValueB,
+															const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, 
+															float& UnitValueATo, float& UnitValueBTo ) {
 	UnitValueOriginal = UnitValue;
 	if ( !bTruncateA ) {
 		UnitValueATo = ( UnitValue / GetTempUnitValue( UnitFrom ) ) * GetTempUnitValue( UnitToValueA );
@@ -456,7 +492,8 @@ void UPPKLibraryUnitConverters::TempUnitsConverterAdvanced( const float UnitValu
 	}
 }
 
-void UPPKLibraryUnitConverters::TempUnitsConverterComplete( const float UnitValue, const ETempUnitsList UnitFrom, const bool bTruncate, FTempUnitsStruct& UnitList ) {
+void UPPKLibraryUnitConverters::TempUnitsConverterComplete( const float UnitValue, const ETempUnitsList UnitFrom, const bool bTruncate, 
+															FTempUnitsStruct& UnitList ) {
 	if ( !bTruncate ) {
 		UnitList.UCelsius = ( UnitValue / GetTempUnitValue( UnitFrom ) ) * GetTempUnitValue( ETempUnitsList::TUCelsius );
 		UnitList.UFahrenheit = ( UnitValue / GetTempUnitValue( UnitFrom ) ) * GetTempUnitValue( ETempUnitsList::TUFahrenheit );
@@ -468,15 +505,18 @@ void UPPKLibraryUnitConverters::TempUnitsConverterComplete( const float UnitValu
 	}
 }
 
-float UPPKLibraryUnitConverters::TimeUnitsConverterSimple( const float UnitValue, const ETimeUnitsList UnitFrom, const ETimeUnitsList UnitTo, const bool bTruncate ) {
+float UPPKLibraryUnitConverters::TimeUnitsConverterSimple( const float UnitValue, const ETimeUnitsList UnitFrom, 
+														   const ETimeUnitsList UnitTo, const bool bTruncate ) {
 	if ( bTruncate ) {
 		return FMath::TruncToInt( ( UnitValue / GetTimeUnitValue( UnitFrom ) ) * GetTimeUnitValue( UnitTo ) );
 	}
 		return ( UnitValue / GetTimeUnitValue( UnitFrom ) ) * GetTimeUnitValue( UnitTo );
 }
 
-void UPPKLibraryUnitConverters::TimeUnitsConverterAdvanced( const float UnitValue, const ETimeUnitsList UnitFrom, const ETimeUnitsList UnitToValueA, const ETimeUnitsList UnitToValueB, 
-												  const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, float& UnitValueATo, float& UnitValueBTo ) {
+void UPPKLibraryUnitConverters::TimeUnitsConverterAdvanced( const float UnitValue, const ETimeUnitsList UnitFrom, 
+															const ETimeUnitsList UnitToValueA, const ETimeUnitsList UnitToValueB, 
+															const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, 
+															float& UnitValueATo, float& UnitValueBTo ) {
 	UnitValueOriginal = UnitValue;
 	if ( !bTruncateA ) {
 		UnitValueATo = ( UnitValue / GetTimeUnitValue( UnitFrom ) ) * GetTimeUnitValue( UnitToValueA );
@@ -491,7 +531,8 @@ void UPPKLibraryUnitConverters::TimeUnitsConverterAdvanced( const float UnitValu
 	}
 }
 
-void UPPKLibraryUnitConverters::TimeUnitsConverterComplete( const float UnitValue, const ETimeUnitsList UnitFrom, const bool bTruncate, FTimeUnitsStruct& UnitList ) {	
+void UPPKLibraryUnitConverters::TimeUnitsConverterComplete( const float UnitValue, const ETimeUnitsList UnitFrom, const bool bTruncate, 
+															FTimeUnitsStruct& UnitList ) {	
 	if ( !bTruncate ) {
 		UnitList.UNanosecond = ( UnitValue / GetTimeUnitValue( UnitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUNanosecond );
 		UnitList.UMicrosecond = ( UnitValue / GetTimeUnitValue( UnitFrom ) ) * GetTimeUnitValue( ETimeUnitsList::TUMicrosecond );
@@ -521,15 +562,18 @@ void UPPKLibraryUnitConverters::TimeUnitsConverterComplete( const float UnitValu
 	}
 }
 
-float UPPKLibraryUnitConverters::VolUnitsConverterSimple( const float UnitValue, const EVolUnitsList UnitFrom, const EVolUnitsList UnitTo, const bool bTruncate ) {
+float UPPKLibraryUnitConverters::VolUnitsConverterSimple( const float UnitValue, const EVolUnitsList UnitFrom, 
+														  const EVolUnitsList UnitTo, const bool bTruncate ) {
 	if ( bTruncate ) {
 		return FMath::TruncToInt( ( UnitValue / GetVolUnitValue( UnitFrom ) ) * GetVolUnitValue( UnitTo ) );
 	}
 	return ( UnitValue / GetVolUnitValue( UnitFrom ) ) * GetVolUnitValue( UnitTo );
 }
 
-void UPPKLibraryUnitConverters::VolUnitsConverterAdvanced( const float UnitValue, const EVolUnitsList UnitFrom, const EVolUnitsList UnitToValueA, const EVolUnitsList UnitToValueB,
-												   const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, float& UnitValueATo, float& UnitValueBTo ) {
+void UPPKLibraryUnitConverters::VolUnitsConverterAdvanced( const float UnitValue, const EVolUnitsList UnitFrom, 
+														   const EVolUnitsList UnitToValueA, const EVolUnitsList UnitToValueB,
+														   const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, 
+														   float& UnitValueATo, float& UnitValueBTo ) {
 	UnitValueOriginal = UnitValue;
 	if ( !bTruncateA ) {
 		UnitValueATo = ( UnitValue / GetVolUnitValue( UnitFrom ) ) * GetVolUnitValue( UnitToValueA );
@@ -544,7 +588,8 @@ void UPPKLibraryUnitConverters::VolUnitsConverterAdvanced( const float UnitValue
 	}
 }
 
-void UPPKLibraryUnitConverters::VolUnitsConverterComplete( const float UnitValue, const EVolUnitsList UnitFrom, const bool bTruncate, FVolUnitsStruct& UnitList ) {
+void UPPKLibraryUnitConverters::VolUnitsConverterComplete( const float UnitValue, const EVolUnitsList UnitFrom, const bool bTruncate, 
+														   FVolUnitsStruct& UnitList ) {
 	if ( !bTruncate ) {
 		UnitList.UUSLiquidGallon = ( UnitValue / GetVolUnitValue( UnitFrom ) ) * GetVolUnitValue( EVolUnitsList::VUUSLiquidGallon );
 		UnitList.UUSLiquidQuart = ( UnitValue / GetVolUnitValue( UnitFrom ) ) * GetVolUnitValue( EVolUnitsList::VUUSLiquidQuart );
@@ -755,39 +800,39 @@ float UPPKLibraryUnitConverters::GetFrequencyUnitValue( const EFrequencyUnitsLis
 	return 1.f;
 }
 
-float UPPKLibraryUnitConverters::GetLenghtUnitValue( const ELenghtUnitsList LenghtUnit ) {
-	switch ( LenghtUnit ) {
-		case ELenghtUnitsList::LUKilometre:
+float UPPKLibraryUnitConverters::GetLengthUnitValue( const ELengthUnitsList LengthUnit ) {
+	switch ( LengthUnit ) {
+		case ELengthUnitsList::LUKilometre:
 			return 0.001f;
 			break;
-		case ELenghtUnitsList::LUMetre:
+		case ELengthUnitsList::LUMetre:
 			return 1.f;
 			break;
-		case ELenghtUnitsList::LUCentimetre:
+		case ELengthUnitsList::LUCentimetre:
 			return 100.f;
 			break;
-		case ELenghtUnitsList::LUMillimetre:
+		case ELengthUnitsList::LUMillimetre:
 			return 1000.f;
 			break;
-		case ELenghtUnitsList::LUMicrometre:
+		case ELengthUnitsList::LUMicrometre:
 			return 1e+6f;
 			break;
-		case ELenghtUnitsList::LUNanometre:
+		case ELengthUnitsList::LUNanometre:
 			return 1e+9f;
 			break;
-		case ELenghtUnitsList::LUMile:
+		case ELengthUnitsList::LUMile:
 			return 0.000621371f;
 			break;
-		case ELenghtUnitsList::LUYard:
+		case ELengthUnitsList::LUYard:
 			return 1.09361f;
 			break;
-		case ELenghtUnitsList::LUFoot:
+		case ELengthUnitsList::LUFoot:
 			return 3.28084f;
 			break;
-		case ELenghtUnitsList::LUInch:
+		case ELengthUnitsList::LUInch:
 			return 39.3701f;
 			break;
-		case ELenghtUnitsList::LUNauticalMile:
+		case ELengthUnitsList::LUNauticalMile:
 			return 0.000539957f;
 			break;
 	}

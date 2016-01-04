@@ -106,7 +106,7 @@ enum class EFrequencyUnitsList : uint8 { // Frequency
 
 
 UENUM( BlueprintType )
-enum class ELenghtUnitsList : uint8 { // Lenght
+enum class ELengthUnitsList : uint8 { // Length
 	LUKilometre			UMETA( DisplayName = "() Kilometre" ),
 	LUMetre				UMETA( DisplayName = "() Metre" ),
 	LUCentimetre		UMETA( DisplayName = "() Centimetre" ),
@@ -371,7 +371,7 @@ struct FFrequencyUnitsStruct { // Frequency
 };
 
 USTRUCT( BlueprintType )
-struct FLenghtUnitsStruct { // Lenght
+struct FLengthUnitsStruct { // Length
 	GENERATED_USTRUCT_BODY()
 
 	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
@@ -407,7 +407,7 @@ struct FLenghtUnitsStruct { // Lenght
 	UPROPERTY( EditAnywhere, BlueprintReadWrite, Category = "PP2KLibrary|Units|Converters" )
 		float UNauticalMile;
 
-	FLenghtUnitsStruct() { }
+	FLengthUnitsStruct() { }
 };
 
 USTRUCT( BlueprintType )
@@ -635,7 +635,7 @@ public:
 
 	static float GetFrequencyUnitValue( const EFrequencyUnitsList FrequencyUnit );
 
-	static float GetLenghtUnitValue( const ELenghtUnitsList LenghtUnit );
+	static float GetLengthUnitValue( const ELengthUnitsList LengthUnit );
 
 	static float GetMassUnitValue( const EMassUnitsList MassUnit );
 
@@ -703,17 +703,17 @@ public:
 		static void FrequencyUnitsConverterComplete( const float UnitValue, const EFrequencyUnitsList UnitFrom, const bool bTruncate, FFrequencyUnitsStruct& UnitList );
 
 	/** Returns a float with the converted unit */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Lenght Units Converter" ), Category = "PP2KLibrary|Units|Converters" )
-		static float LenghtUnitsConverterSimple( const float UnitValue, const ELenghtUnitsList UnitFrom, const ELenghtUnitsList UnitTo, const bool bTruncate );
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Length Units Converter" ), Category = "PP2KLibrary|Units|Converters" )
+		static float LengthUnitsConverterSimple( const float UnitValue, const ELengthUnitsList UnitFrom, const ELengthUnitsList UnitTo, const bool bTruncate );
 
 	/** Returns two floats with the converted units */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Lenght Units Converter (Advanced)" ), Category = "PP2KLibrary|Units|Converters" )
-		static void LenghtUnitsConverterAdvanced( const float UnitValue, const ELenghtUnitsList UnitFrom, const ELenghtUnitsList UnitToValueA, const ELenghtUnitsList UnitToValueB,
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Length Units Converter (Advanced)" ), Category = "PP2KLibrary|Units|Converters" )
+		static void LengthUnitsConverterAdvanced( const float UnitValue, const ELengthUnitsList UnitFrom, const ELengthUnitsList UnitToValueA, const ELengthUnitsList UnitToValueB,
 												const bool bTruncateA, const bool bTruncateB, float& UnitValueOriginal, float& UnitValueATo, float& UnitValueBTo );
 
 	/** Returns all converted units in floats */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Lenght Units Converter (Complete)" ), Category = "PP2KLibrary|Units|Converters" )
-		static void LenghtUnitsConverterComplete( const float UnitValue, const ELenghtUnitsList UnitFrom, const bool bTruncate, FLenghtUnitsStruct& UnitList );
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Length Units Converter (Complete)" ), Category = "PP2KLibrary|Units|Converters" )
+		static void LengthUnitsConverterComplete( const float UnitValue, const ELengthUnitsList UnitFrom, const bool bTruncate, FLengthUnitsStruct& UnitList );
 
 	/** Returns a float with the converted unit */
 	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Mass Units Converter" ), Category = "PP2KLibrary|Units|Converters" )
