@@ -63,33 +63,69 @@ protected:
 
 public:
 
+	/** Print the whole bool array in the screen */
+	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
+		static void PrintBoolArray( const TArray<bool> BoolArray, const bool SingleString = false, const FString& Text = FString( TEXT( "aBool: " ) ), const bool NoText = false, float Duration = 2.f );
+
 	/** Print the whole uint8 / Byte array in the screen */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Print" )
-		static void PrintByteArray( const TArray<uint8> ByteArray );
+	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
+		static void PrintByteArray( const TArray<uint8> ByteArray, const bool SingleString = false, const FString& Text = FString( TEXT( "aByte: " ) ), const bool NoText = false, float Duration = 2.f );
 
 	/** Print the whole int32 / int array in the screen */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Print" )
-		static void PrintIntArray( const TArray<int32> IntArray );
+	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
+		static void PrintIntegerArray( const TArray<int32> IntArray, const bool SingleString = false, const FString& Text = FString( TEXT( "aInt: " ) ), const bool NoText = false, float Duration = 2.f );
 
 	/** Print the whole float array in the screen */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Print" )
-		static void PrintFloatArray( const TArray<float> FloatArray );
+	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
+		static void PrintFloatArray( const TArray<float> FloatArray, const bool SingleString = false, const FString& Text = FString( TEXT( "aFloat: " ) ), const bool NoText = false, float Duration = 2.f );
 
 	/** Print the whole FVector2D array in the screen */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Print" )
-		static void PrintVector2DArray( const TArray<FVector2D> Vector2DArray );
+	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
+		static void PrintVector2DArray( const TArray<FVector2D> Vector2DArray, const bool SingleString = false, const FString& Text = FString( TEXT( "aVec2D: " ) ), const bool NoText = false, float Duration = 2.f );
 
 	/** Print the whole FVector array in the screen */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Print" )
-		static void PrintVectorArray( const TArray<FVector> VectorArray );
+	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
+		static void PrintVectorArray( const TArray<FVector> VectorArray, const bool SingleString = false, const FString& Text = FString( TEXT( "aVec: " ) ), const bool NoText = false, float Duration = 2.f );
 
 	/** Print the whole FVector4 array in the screen */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Print" )
-		static void PrintVector4Array( const TArray<FVector4> Vector4Array );
+	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
+		static void PrintVector4Array( const TArray<FVector4> Vector4Array, const bool SingleString = false, const FString& Text = FString( TEXT( "aVec4: " ) ), const bool NoText = false, float Duration = 2.f );
 
 	/** Print the whole FRotator array in the screen */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Tools|Print" )
-		static void PrintRotatorArray( const TArray<FRotator> RotatorArray );
+	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
+		static void PrintRotatorArray( const TArray<FRotator> RotatorArray, const bool SingleString = false, const  FString& Text = FString( TEXT( "aRot: " ) ), const bool NoText = false, float Duration = 2.f );
+
+	/** Returns FString with all the content in the Bool Array */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
+		static FString ArrayBoolToString( const TArray<bool> BoolArray );
+
+	/** Returns FString with all the content in the Byte Array */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
+		static FString ArrayByteToString( const TArray<uint8> ByteArray );
+
+	/** Returns FString with all the content in the Integer Array */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
+		static FString ArrayIntegerToString( const TArray<int32> IntArray );
+
+	/** Returns FString with all the content in the Float Array */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
+		static FString ArrayFloatToString( const TArray<float> FloatArray );
+
+	/** Returns FString with all the content in the FVector2D Array */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
+		static FString ArrayVector2DToString( const TArray<FVector2D> Vector2DArray );
+
+	/** Returns FString with all the content in the FVector Array */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
+		static FString ArrayVectorToString( const TArray<FVector> VectorArray );
+
+	/** Returns FString with all the content in the FVector4 Array */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
+		static FString ArrayVector4ToString( const TArray<FVector4> Vector4Array );
+
+	/** Returns FString with all the content in the FRotator Array */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
+		static FString ArrayRotatorToString( const TArray<FRotator> RotatorArray );
 
 	/** Returns a float from two ints A and B to A.B */
 	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Make Float" ), Category = "PP2KLibrary|Math|Float" )

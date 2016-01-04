@@ -44,73 +44,316 @@ UPPKLibraryTools::UPPKLibraryTools( const class FObjectInitializer& ObjectInitia
 
 }
 
-void UPPKLibraryTools::PrintByteArray( const TArray<uint8> ByteArray ) {
+void UPPKLibraryTools::PrintBoolArray( const TArray<bool> BoolArray, const bool SingleString, const FString& Text, const bool NoText,
+									   float Duration ) {
+#if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
+	if ( NoText ) { Text == ""; }
+	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
+	if ( BoolArray.Num() != 0 ) {
+		if ( !SingleString ) {
+			for ( int32 i = 0; i < BoolArray.Num(); i++ ) {
+				GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ( BoolArray[i] ? TEXT( "true" ) : TEXT( "false" ) ) );
+			}
+		} else {
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayBoolToString( BoolArray ) );
+		}
+	} else {
+		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The Bool Array is empty" ) );
+	}
+#endif
+}
+
+void UPPKLibraryTools::PrintByteArray( const TArray<uint8> ByteArray, const bool SingleString, const FString& Text, const bool NoText,
+									   float Duration ) {
+#if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
+	if ( NoText ) { Text == ""; }
+	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
 	if ( ByteArray.Num() != 0 ) {
-		for ( int32 i = 0; i < ByteArray.Num(); i++ ) {
-			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, FString::FromInt( ByteArray[i] ) );
+		if ( !SingleString ) {
+			for ( int32 i = 0; i < ByteArray.Num(); i++ ) {
+				GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + FString::FromInt( ByteArray[i] ) );
+			}
+		} else {
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayByteToString( ByteArray ) );
 		}
+	} else {
+		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The Byte Array is empty" ) );
 	}
+#endif
 }
 
-void UPPKLibraryTools::PrintIntArray( const TArray<int32> IntArray ) {
+void UPPKLibraryTools::PrintIntegerArray( const TArray<int32> IntArray, const bool SingleString, const FString& Text, const bool NoText,
+										  float Duration ) {
+#if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
+	if ( NoText ) { Text == ""; }
+	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
 	if ( IntArray.Num() != 0 ) {
-		for ( int32 i = 0; i < IntArray.Num(); i++ ) {
-			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, FString::FromInt( IntArray[i] ) );
+		if ( !SingleString ) {
+			for ( int32 i = 0; i < IntArray.Num(); i++ ) {
+				GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + FString::FromInt( IntArray[i] ) );
+			}
+		} else {
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayIntegerToString( IntArray ) );
 		}
+	} else {
+		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The Integer Array is empty" ) );
 	}
+#endif
 }
 
-void UPPKLibraryTools::PrintFloatArray( const TArray<float> FloatArray ) {
+void UPPKLibraryTools::PrintFloatArray( const TArray<float> FloatArray, const bool SingleString, const FString& Text, const bool NoText,
+										float Duration ) {
+#if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
+	if ( NoText ) { Text == ""; }
+	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
 	if ( FloatArray.Num() != 0 ) {
-		for ( int32 i = 0; i < FloatArray.Num(); i++ ) {
-			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, FString::SanitizeFloat( FloatArray[i] ) );
+		if ( !SingleString ) {
+			for ( int32 i = 0; i < FloatArray.Num(); i++ ) {
+				GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + FString::SanitizeFloat( FloatArray[i] ) );
+			}
+		} else {
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayFloatToString( FloatArray ) );
 		}
+	} else {
+		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The Float Array is empty" ) );
 	}
+#endif
 }
 
-void UPPKLibraryTools::PrintVector2DArray( const TArray<FVector2D> Vector2DArray ) {
+void UPPKLibraryTools::PrintVector2DArray( const TArray<FVector2D> Vector2DArray, const bool SingleString, const FString& Text,
+										   const bool NoText, float Duration ) {
+#if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
+	if ( NoText ) { Text == ""; }
+	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
 	if ( Vector2DArray.Num() != 0 ) {
-		for ( int32 i = 0; i < Vector2DArray.Num(); i++ ) {
-			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, "( " + 
-											  FString::SanitizeFloat( Vector2DArray[i].X ) + " , " + 
-											  FString::SanitizeFloat( Vector2DArray[i].Y ) + " )" );
+		if ( !SingleString ) {
+			for ( int32 i = 0; i < Vector2DArray.Num(); i++ ) {
+				GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + "( " +
+												  FString::SanitizeFloat( Vector2DArray[i].X ) + " , " + 
+												  FString::SanitizeFloat( Vector2DArray[i].Y ) + " )" );
+			}
+		} else {
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayVector2DToString( Vector2DArray ) );
 		}
+	} else {
+		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The FVector2D Array is empty" ) );
 	}
+#endif
 }
 
-void UPPKLibraryTools::PrintVectorArray( const TArray<FVector> VectorArray ) {
+void UPPKLibraryTools::PrintVectorArray( const TArray<FVector> VectorArray, const bool SingleString, const FString& Text, const bool NoText,
+										 float Duration ) {
+#if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
+	if ( NoText ) { Text == ""; }
+	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
 	if ( VectorArray.Num() != 0 ) {
-		for ( int32 i = 0; i < VectorArray.Num(); i++ ) {
-			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, "( " + 
-											  FString::SanitizeFloat( VectorArray[i].X ) + " , " + 
-											  FString::SanitizeFloat( VectorArray[i].Y ) + " , " + 
-											  FString::SanitizeFloat( VectorArray[i].Z ) + " )" );
+		if ( !SingleString ) {
+			for ( int32 i = 0; i < VectorArray.Num(); i++ ) {
+				GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + "( " +
+												  FString::SanitizeFloat( VectorArray[i].X ) + " , " + 
+												  FString::SanitizeFloat( VectorArray[i].Y ) + " , " + 
+												  FString::SanitizeFloat( VectorArray[i].Z ) + " )" );
+			}
+		} else {
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayVectorToString( VectorArray ) );
 		}
+	} else {
+		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The FVector Array is empty" ) );
 	}
+#endif
 }
 
-void UPPKLibraryTools::PrintVector4Array( const TArray<FVector4> Vector4Array ) {
+void UPPKLibraryTools::PrintVector4Array( const TArray<FVector4> Vector4Array, const bool SingleString, const FString& Text,
+										  const bool NoText, float Duration ) {
+#if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
+	if ( NoText ) { Text == ""; }
+	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
 	if ( Vector4Array.Num() != 0 ) {
-		for ( int32 i = 0; i < Vector4Array.Num(); i++ ) {
-			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, "( " +
-											  FString::SanitizeFloat( Vector4Array[i].X ) + " , " +
-											  FString::SanitizeFloat( Vector4Array[i].Y ) + " , " +
-											  FString::SanitizeFloat( Vector4Array[i].Z ) + " , " +
-											  FString::SanitizeFloat( Vector4Array[i].W ) + " )" );
+		if ( !SingleString ) {
+			for ( int32 i = 0; i < Vector4Array.Num(); i++ ) {
+				GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, Text + "( " +
+												  FString::SanitizeFloat( Vector4Array[i].X ) + " , " +
+												  FString::SanitizeFloat( Vector4Array[i].Y ) + " , " +
+												  FString::SanitizeFloat( Vector4Array[i].Z ) + " , " +
+												  FString::SanitizeFloat( Vector4Array[i].W ) + " )" );
+			}
+		} else {
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayVector4ToString( Vector4Array ) );
 		}
+	} else {
+		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The FVector4 Array is empty" ) );
 	}
+#endif
 }
 
-void UPPKLibraryTools::PrintRotatorArray( const TArray<FRotator> RotatorArray ) {
+void UPPKLibraryTools::PrintRotatorArray( const TArray<FRotator> RotatorArray, const bool SingleString, const FString& Text,
+										  const bool NoText, float Duration ) {
+#if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
+	if ( NoText ) { Text == ""; }
+	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
 	if ( RotatorArray.Num() != 0 ) {
-		for ( int32 i = 0; i < RotatorArray.Num(); i++ ) {
-			GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, "( " +
-											  FString::SanitizeFloat( RotatorArray[i].Pitch ) + " , " +
-											  FString::SanitizeFloat( RotatorArray[i].Roll ) + " , " +
-											  FString::SanitizeFloat( RotatorArray[i].Yaw ) + " )" );
+		if ( !SingleString ) {
+			for ( int32 i = 0; i < RotatorArray.Num(); i++ ) {
+				GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, Text + "( " +
+												  FString::SanitizeFloat( RotatorArray[i].Pitch ) + " , " +
+												  FString::SanitizeFloat( RotatorArray[i].Roll ) + " , " +
+												  FString::SanitizeFloat( RotatorArray[i].Yaw ) + " )" );
+			}
+		} else {
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayRotatorToString( RotatorArray ) );
 		}
+	} else {
+		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The FRotator Array is empty" ) );
 	}
+#endif
 }
+
+
+
+FString UPPKLibraryTools::ArrayBoolToString( const TArray<bool> BoolArray ) {
+	FString tempString = TEXT( "Empty" );
+	if ( BoolArray.Num() != 0 ) {
+		tempString = "{ ";
+		for ( int32 i = 0; i < BoolArray.Num(); i++ ) {
+			if ( i == 0 ) { tempString = tempString + ( BoolArray[i] ? TEXT( "true" ) : TEXT( "false" ) ); 
+			} else { tempString = tempString + ", " + ( BoolArray[i] ? TEXT( "true" ) : TEXT( "false" ) ); }
+		}
+		tempString = tempString + " }";
+	}
+	return tempString;
+}
+
+
+FString UPPKLibraryTools::ArrayByteToString( const TArray<uint8> ByteArray ) {
+	FString tempString = TEXT( "Empty" );
+	if ( ByteArray.Num() != 0 ) {
+		tempString = "{ ";
+		for ( int32 i = 0; i < ByteArray.Num(); i++ ) {
+			if ( i == 0 ) { tempString = tempString + FString::FromInt( ByteArray[i] ); 
+			} else { tempString = tempString + ", " + FString::FromInt( ByteArray[i] ); }
+		}
+		tempString = tempString + " }";
+	}
+	return tempString;
+}
+
+
+FString UPPKLibraryTools::ArrayIntegerToString( const TArray<int32> IntArray ) {
+	FString tempString = TEXT( "Empty" );
+	if ( IntArray.Num() != 0 ) {
+		tempString = "{ ";
+		for ( int32 i = 0; i < IntArray.Num(); i++ ) {
+			if ( i == 0 ) { tempString = tempString + FString::FromInt( IntArray[i] ); 
+			} else { tempString = tempString + ", " + FString::FromInt( IntArray[i] ); }
+		}
+		tempString = tempString + " }";
+	}
+	return tempString;
+}
+
+
+FString UPPKLibraryTools::ArrayFloatToString( const TArray<float> FloatArray ) {
+	FString tempString = TEXT( "Empty" );
+	if ( FloatArray.Num() != 0 ) {
+		tempString = "{ ";
+		for ( int32 i = 0; i < FloatArray.Num(); i++ ) {
+			if ( i == 0 ) { tempString = tempString + FString::SanitizeFloat( FloatArray[i] ); 
+			} else { tempString = tempString + ", " + FString::SanitizeFloat( FloatArray[i] ); }
+		}
+		tempString = tempString + " }";
+	}
+	return tempString;
+}
+
+
+FString UPPKLibraryTools::ArrayVector2DToString( const TArray<FVector2D> Vector2DArray ) {
+	FString tempString = TEXT( "Empty" );
+	if ( Vector2DArray.Num() != 0 ) {
+		tempString = "{ ";
+		for ( int32 i = 0; i < Vector2DArray.Num(); i++ ) {
+			if ( i == 0 ) { 
+				tempString = tempString + "( " +
+				FString::SanitizeFloat( Vector2DArray[i].X ) + " , " +
+				FString::SanitizeFloat( Vector2DArray[i].Y ) + " )";
+			} else { 
+				tempString = tempString + ", " + "( " +
+				FString::SanitizeFloat( Vector2DArray[i].X ) + " , " +
+				FString::SanitizeFloat( Vector2DArray[i].Y ) + " )";
+			}
+		}
+		tempString = tempString + " }";
+	}
+	return tempString;
+}
+
+
+FString UPPKLibraryTools::ArrayVectorToString( const TArray<FVector> VectorArray ) {
+	FString tempString = TEXT( "Empty" );
+	if ( VectorArray.Num() != 0 ) {
+		tempString = "{ ";
+		for ( int32 i = 0; i < VectorArray.Num(); i++ ) {
+			if ( i == 0 ) { 
+				tempString = tempString + "( " +
+					FString::SanitizeFloat( VectorArray[i].X ) + " , " +
+					FString::SanitizeFloat( VectorArray[i].Y ) + " , " +
+					FString::SanitizeFloat( VectorArray[i].Z ) + " )";
+			} else { 
+				tempString = tempString + ", " + "( " +
+					FString::SanitizeFloat( VectorArray[i].X ) + " , " +
+					FString::SanitizeFloat( VectorArray[i].Y ) + " , " +
+					FString::SanitizeFloat( VectorArray[i].Z ) + " )"; }
+		}
+		tempString = tempString + " }";
+	}
+	return tempString;
+}
+
+
+FString UPPKLibraryTools::ArrayVector4ToString( const TArray<FVector4> Vector4Array ) {
+	FString tempString = TEXT( "Empty" );
+	if ( Vector4Array.Num() != 0 ) {
+		tempString = "{ ";
+		for ( int32 i = 0; i < Vector4Array.Num(); i++ ) {
+			if ( i == 0 ) { 
+				tempString = tempString + "( " +
+					FString::SanitizeFloat( Vector4Array[i].X ) + " , " +
+					FString::SanitizeFloat( Vector4Array[i].Y ) + " , " +
+					FString::SanitizeFloat( Vector4Array[i].Z ) + " , " +
+					FString::SanitizeFloat( Vector4Array[i].W ) + " )";
+			} else { 
+				tempString = tempString + ", " + "( " +
+					FString::SanitizeFloat( Vector4Array[i].X ) + " , " +
+					FString::SanitizeFloat( Vector4Array[i].Y ) + " , " +
+					FString::SanitizeFloat( Vector4Array[i].Z ) + " , " +
+					FString::SanitizeFloat( Vector4Array[i].W ) + " )"; }
+		}
+		tempString = tempString + " }";
+	}
+	return tempString;
+}
+
+
+FString UPPKLibraryTools::ArrayRotatorToString( const TArray<FRotator> RotatorArray ) {
+	FString tempString = TEXT( "Empty" );
+	if ( RotatorArray.Num() != 0 ) {
+		tempString = "{ ";
+		for ( int32 i = 0; i < RotatorArray.Num(); i++ ) {
+			if ( i == 0 ) { 
+				tempString = tempString + "( " +
+					FString::SanitizeFloat( RotatorArray[i].Pitch ) + " , " +
+					FString::SanitizeFloat( RotatorArray[i].Roll ) + " , " +
+					FString::SanitizeFloat( RotatorArray[i].Yaw ) + " )";
+			} else { 
+				tempString = tempString + ", " + "( " +
+					FString::SanitizeFloat( RotatorArray[i].Pitch ) + " , " +
+					FString::SanitizeFloat( RotatorArray[i].Roll ) + " , " +
+					FString::SanitizeFloat( RotatorArray[i].Yaw ) + " )"; }
+		}
+		tempString = tempString + " }";
+	}
+	return tempString;
+}
+
 
 float UPPKLibraryTools::MakeFloatFromInts( const int32 A, const int32 B ) {
 	float value = A;
@@ -360,7 +603,8 @@ FVector2D UPPKLibraryTools::GetConfigVector2D( const FString sectionName, const 
 	return FVector2D( value.X, value.Y );
 }
 
-void UPPKLibraryTools::SetConfigBool( const FString sectionName, const FString variableName, const bool value, const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigBool( const FString sectionName, const FString variableName, const bool value, 
+									  const EIniFilesList iniFile ) {
 	if ( !GConfig ) return;
 	switch ( iniFile ) {
 		case EIniFilesList::GGameIni:
@@ -377,7 +621,8 @@ void UPPKLibraryTools::SetConfigBool( const FString sectionName, const FString v
 
 }
 
-void UPPKLibraryTools::SetConfigInt( const FString sectionName, const FString variableName, const int32 value, const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigInt( const FString sectionName, const FString variableName, const int32 value, 
+									 const EIniFilesList iniFile ) {
 	if ( !GConfig ) return;
 
 	switch ( iniFile ) {
@@ -394,7 +639,8 @@ void UPPKLibraryTools::SetConfigInt( const FString sectionName, const FString va
 	}
 }
 
-void UPPKLibraryTools::SetConfigFloat( const FString sectionName, const FString variableName, const float value, const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigFloat( const FString sectionName, const FString variableName, const float value, 
+									   const EIniFilesList iniFile ) {
 	if ( !GConfig ) return;
 
 	switch ( iniFile ) {
@@ -411,7 +657,8 @@ void UPPKLibraryTools::SetConfigFloat( const FString sectionName, const FString 
 	}
 }
 
-void UPPKLibraryTools::SetConfigVector( const FString sectionName, const FString variableName, const FVector value, const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigVector( const FString sectionName, const FString variableName, const FVector value, 
+										const EIniFilesList iniFile ) {
 	if ( !GConfig ) return;
 
 	switch ( iniFile ) {
@@ -428,7 +675,8 @@ void UPPKLibraryTools::SetConfigVector( const FString sectionName, const FString
 	}
 }
 
-void UPPKLibraryTools::SetConfigRotator( const FString sectionName, const FString variableName, const FRotator value, const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigRotator( const FString sectionName, const FString variableName, const FRotator value, 
+										 const EIniFilesList iniFile ) {
 	if ( !GConfig ) return;
 
 	switch ( iniFile ) {
@@ -445,7 +693,8 @@ void UPPKLibraryTools::SetConfigRotator( const FString sectionName, const FStrin
 	}
 }
 
-void UPPKLibraryTools::SetConfigColor( const FString sectionName, const FString variableName, const FLinearColor value, const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigColor( const FString sectionName, const FString variableName, const FLinearColor value, 
+									   const EIniFilesList iniFile ) {
 	if ( !GConfig ) return;
 
 	switch ( iniFile ) {
@@ -462,7 +711,8 @@ void UPPKLibraryTools::SetConfigColor( const FString sectionName, const FString 
 	}
 }
 
-void UPPKLibraryTools::SetConfigString( const FString sectionName, const FString variableName, const FString value, const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigString( const FString sectionName, const FString variableName, const FString value, 
+										const EIniFilesList iniFile ) {
 	if ( !GConfig ) return;
 
 	switch ( iniFile ) {
@@ -479,7 +729,8 @@ void UPPKLibraryTools::SetConfigString( const FString sectionName, const FString
 	}
 }
 
-void UPPKLibraryTools::SetConfigVector2D( const FString sectionName, const FString variableName, const FVector2D value, const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigVector2D( const FString sectionName, const FString variableName, const FVector2D value, 
+										  const EIniFilesList iniFile ) {
 	if ( !GConfig ) return;
 
 	switch ( iniFile ) {
