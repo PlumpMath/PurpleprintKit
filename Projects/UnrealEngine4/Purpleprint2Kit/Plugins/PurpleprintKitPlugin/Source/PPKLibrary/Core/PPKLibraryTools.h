@@ -40,7 +40,7 @@ PPKLibraryTools.h
 
 
 UENUM()
-enum class EIniFilesList : uint8 {
+enum class EINIFilesList : uint8 {
 	GGameIni 				UMETA( DisplayName = "Game" ),
 	GGameUserSettingsIni	UMETA( DisplayName = "User Settings" ),
 	GScalabilityIni			UMETA( DisplayName = "Scalability" ),
@@ -61,7 +61,7 @@ public:
 
 	/** Print the whole bool array in the screen */
 	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
-		static void PrintBoolArray( const TArray<bool> BoolArray, const bool SingleString = false, const FString& Text = FString( TEXT( "aBool: " ) ), const bool NoText = false, float Duration = 2.f );
+		static void PrintBoolArray( const TArray<bool> BoolArray, const bool SingleString = false, const FString& Text = FString( TEXT( "aBool: " ) ), const bool NoText = false, float Duration = 2.f, const bool VisualMode = false );
 
 	/** Print the whole uint8 / Byte array in the screen */
 	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
@@ -77,23 +77,23 @@ public:
 
 	/** Print the whole FVector2D array in the screen */
 	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
-		static void PrintVector2DArray( const TArray<FVector2D> Vector2DArray, const bool SingleString = false, const FString& Text = FString( TEXT( "aVec2D: " ) ), const bool NoText = false, float Duration = 2.f );
+		static void PrintVector2DArray( const TArray<FVector2D> Vec2Array, const bool SingleString = false, const FString& Text = FString( TEXT( "aVec2D: " ) ), const bool NoText = false, float Duration = 2.f );
 
 	/** Print the whole FVector array in the screen */
 	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
-		static void PrintVectorArray( const TArray<FVector> VectorArray, const bool SingleString = false, const FString& Text = FString( TEXT( "aVec: " ) ), const bool NoText = false, float Duration = 2.f );
+		static void PrintVectorArray( const TArray<FVector> VecArray, const bool SingleString = false, const FString& Text = FString( TEXT( "aVec: " ) ), const bool NoText = false, float Duration = 2.f );
 
 	/** Print the whole FVector4 array in the screen */
 	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
-		static void PrintVector4Array( const TArray<FVector4> Vector4Array, const bool SingleString = false, const FString& Text = FString( TEXT( "aVec4: " ) ), const bool NoText = false, float Duration = 2.f );
+		static void PrintVector4Array( const TArray<FVector4> Vec4Array, const bool SingleString = false, const FString& Text = FString( TEXT( "aVec4: " ) ), const bool NoText = false, float Duration = 2.f );
 
 	/** Print the whole FRotator array in the screen */
 	UFUNCTION( BlueprintCallable, meta = ( AdvancedDisplay = "2" ), Category = "PP2KLibrary|Tools|Print" )
-		static void PrintRotatorArray( const TArray<FRotator> RotatorArray, const bool SingleString = false, const  FString& Text = FString( TEXT( "aRot: " ) ), const bool NoText = false, float Duration = 2.f );
+		static void PrintRotatorArray( const TArray<FRotator> RotArray, const bool SingleString = false, const  FString& Text = FString( TEXT( "aRot: " ) ), const bool NoText = false, float Duration = 2.f );
 
 	/** Returns FString with all the content in the Bool Array */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
-		static FString ArrayBoolToString( const TArray<bool> BoolArray );
+		static FString ArrayBoolToString( const TArray<bool> BoolArray, const bool VisualMode );
 
 	/** Returns FString with all the content in the Byte Array */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
@@ -109,31 +109,31 @@ public:
 
 	/** Returns FString with all the content in the FVector2D Array */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
-		static FString ArrayVector2DToString( const TArray<FVector2D> Vector2DArray );
+		static FString ArrayVector2DToString( const TArray<FVector2D> Vec2Array );
 
 	/** Returns FString with all the content in the FVector Array */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
-		static FString ArrayVectorToString( const TArray<FVector> VectorArray );
+		static FString ArrayVectorToString( const TArray<FVector> VecArray );
 
 	/** Returns FString with all the content in the FVector4 Array */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
-		static FString ArrayVector4ToString( const TArray<FVector4> Vector4Array );
+		static FString ArrayVector4ToString( const TArray<FVector4> Vec4Array );
 
 	/** Returns FString with all the content in the FRotator Array */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Tools|Array" )
-		static FString ArrayRotatorToString( const TArray<FRotator> RotatorArray );
+		static FString ArrayRotatorToString( const TArray<FRotator> RotArray );
 
 	/** Returns a float from two ints A and B to A.B */
 	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Make Float" ), Category = "PP2KLibrary|Math|Float" )
-		static float MakeFloatFromInts( const int32 A, const int32 B );
+		static float MakeFloatFromIntegers( const int32 A, const int32 B );
 
 	/** Returns split a float into two ints A.B to A and B */
 	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Break Float" ), Category = "PP2KLibrary|Math|Int" )
-		static int32 DivideFloatIntoInts( const float Ref, int32& B );
+		static int32 DivideFloatIntoIntegers( const float Ref, int32& B );
 
 	/** Returns the float inverted A.B to B.A */
 	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Invert Float Order" ), Category = "PP2KLibrary|Math|Float" )
-		static float InvertFloat( const float floatValue );
+		static float InvertFloat( const float FloatValue );
 
 	/** Returns FVector2D(A,B) from a float A.B */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Vector" )
@@ -149,130 +149,146 @@ public:
 
 	/** Returns FVector2D(A,B) from the FVector(A,B,C) */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Vector" )
-		static FVector2D VectorToVector2D( const FVector &VectorValue );
+		static FVector2D VectorToVector2D( const FVector &VecValue );
 
 	/** Returns FVector2D(A,B) from the FVector4(A,B,C,D) */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Vector" )
-		static FVector2D Vector4ToVector2D( const FVector4 &Vector4Value );
+		static FVector2D Vector4ToVector2D( const FVector4 &Vec4Value );
 
 	/** Returns FVector(A,B,0) from the FVector2D(A,B) */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Vector" )
-		static FVector Vector2DToVector( const FVector2D &Vector2DValue );
+		static FVector Vector2DToVector( const FVector2D &Vec2Value );
 
 	/** Returns FVector(A,B,C) from the FVector4(A,B,C,D) */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Vector" )
-		static FVector Vector4ToVector( const FVector4 &Vector4Value );
+		static FVector Vector4ToVector( const FVector4 &Vec4Value );
 
 	/** Returns FVector4(A,B,0,0) from the FVector2D(A,B) */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Vector" )
-		static FVector4 Vector2DToVector4( const FVector2D &Vector2DValue );
+		static FVector4 Vector2DToVector4( const FVector2D &Vec2Value );
 
 	/** Returns FVector4(A,B,C,0) from the FVector(A,B,C) */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Vector" )
-		static FVector4 VectorToVector4( const FVector &VectorValue );
+		static FVector4 VectorToVector4( const FVector &VecValue );
 
 	/** Returns FRotator(C,B,A) from the FRotator(A,B,C) */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Math|Rotator" )
-		static FRotator RotatorOrderInvert( const FRotator &rotatorValue );
+		static FRotator RotatorOrderInvert( const FRotator &RotValue );
 
 	/** Returns FVector2D(B,A) from the FVector2D(A,B) */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Math|Vector2D" )
-		static FVector2D Vector2DOrderInvert( const FVector2D &vector2DValue );
+		static FVector2D Vector2DOrderInvert( const FVector2D &Vec2Value );
 
 	/** Returns FVector(C,B,A) from the FVector(A,B,C) */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Math|Vector" )
-		static FVector VectorOrderInvert( const FVector &vectorValue );
+		static FVector VectorOrderInvert( const FVector &VecValue );
 
 	/** Returns FVector4(D,C,B,A) from the FVector4(A,B,C,D) */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Math|Vector4" )
-		static FVector4 Vector4OrderInvert( const FVector4 &vector4Value );
+		static FVector4 Vector4OrderInvert( const FVector4 &Vec4Value );
 
 	/** Returns FRotator(C,A,B) from the FRotator(A,B,C) */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Math|Rotator" )
-		static FRotator RotatorOrderRight( const FRotator &rotatorValue );
+		static FRotator RotatorOrderRight( const FRotator &RotValue );
 
 	/** Returns FVector(C,A,B) from the FVector(A,B,C) */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Math|Vector" )
-		static FVector VectorOrderRight( const FVector &vectorValue );
+		static FVector VectorOrderRight( const FVector &VecValue );
 
 	/** Returns FVector(D,A,B,C) from the FVector(A,B,C) */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Math|Vector" )
-		static FVector4 Vector4OrderRight( const FVector4 &vector4Value );
+		static FVector4 Vector4OrderRight( const FVector4 &Vec4Value );
 
 	/** Returns FRotator(B,C,A) from the FRotator(A,B,C) */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Math|Rotator" )
-		static FRotator RotatorOrderLeft( const FRotator &rotatorValue );
+		static FRotator RotatorOrderLeft( const FRotator &RotValue );
 
 	/** Returns FVector(B,C,A) from the FVector(A,B,C) */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Math|Vector" )
-		static FVector VectorOrderLeft( const FVector &vectorValue );
+		static FVector VectorOrderLeft( const FVector &VecValue );
 
 	/** Returns FVector(B,C,D,A) from the FVector(A,B,C,D) */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Math|Vector" )
-		static FVector4 Vector4OrderLeft( const FVector4 &vector4Value );
+		static FVector4 Vector4OrderLeft( const FVector4 &Vec4Value );
 
 	/** Returns the value of the selected bool from the selected ini config file */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static bool GetConfigBool( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
+		static bool GetConfigBool( const FString SectionName, const FString VariableName, const EINIFilesList INIFile );
+
+	/** Returns the value of the selected uint8 from the selected ini config file */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
+		static uint8 GetConfigByte( const FString SectionName, const FString VariableName, const EINIFilesList INIFile );
 
 	/** Returns the value of the selected int32 from the selected ini config file */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static int32 GetConfigInt( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
+		static int32 GetConfigInteger( const FString SectionName, const FString VariableName, const EINIFilesList INIFile );
 
 	/** Returns the value of the selected float from the selected ini config file */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static float GetConfigFloat( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
-
-	/** Returns the value of the selected FVector from the selected ini config file */
-	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static FVector GetConfigVector( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
-
-	/** Returns the value of the selected FRotator from the selected ini config file */
-	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static FRotator GetConfigRotator( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
-
-	/** Returns the value of the selected FLinearColor from the selected ini config file */
-	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static FLinearColor GetConfigColor( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
-
-	/** Returns the value of the selected FString from the selected ini config file */
-	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static FString GetConfigString( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
+		static float GetConfigFloat( const FString SectionName, const FString VariableName, const EINIFilesList INIFile );
 
 	/** Returns the value of the selected FVector2D from the selected ini config file */
 	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
-		static FVector2D GetConfigVector2D( const FString sectionName, const FString variableName, const EIniFilesList iniFile );
+		static FVector2D GetConfigVector2D( const FString SectionName, const FString VariableName, const EINIFilesList INIFile );
+
+	/** Returns the value of the selected FVector from the selected ini config file */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
+		static FVector GetConfigVector( const FString SectionName, const FString VariableName, const EINIFilesList INIFile );
+
+	/** Returns the value of the selected FVector from the selected ini config file */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
+		static FVector4 GetConfigVector4( const FString SectionName, const FString VariableName, const EINIFilesList INIFile );
+
+	/** Returns the value of the selected FRotator from the selected ini config file */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
+		static FRotator GetConfigRotator( const FString SectionName, const FString VariableName, const EINIFilesList INIFile );
+
+	/** Returns the value of the selected FLinearColor from the selected ini config file */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
+		static FLinearColor GetConfigColor( const FString SectionName, const FString VariableName, const EINIFilesList INIFile );
+
+	/** Returns the value of the selected FString from the selected ini config file */
+	UFUNCTION( BlueprintPure, Category = "PP2KLibrary|Config" )
+		static FString GetConfigString( const FString SectionName, const FString VariableName, const EINIFilesList INIFile );
 
 	/** Set the value of the selected bool from the selected ini config file */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigBool( const FString sectionName, const FString variableName, const bool value, const EIniFilesList iniFile );
+		static void SetConfigBool( const FString SectionName, const FString VariableName, const bool BoolValue, const EINIFilesList INIFile );
+
+	/** Set the value of the selected uint8 from the selected ini config file */
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
+		static void SetConfigByte( const FString SectionName, const FString VariableName, const uint8 ByteValue, const EINIFilesList INIFile );
 
 	/** Set the value of the selected int32 from the selected ini config file */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigInt( const FString sectionName, const FString variableName, const int32 value, const EIniFilesList iniFile );
+		static void SetConfigInteger( const FString SectionName, const FString VariableName, const int32 IntValue, const EINIFilesList INIFile );
 
 	/** Set the value of the selected float from the selected ini config file */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigFloat( const FString sectionName, const FString variableName, const float value, const EIniFilesList iniFile );
-
-	/** Set the value of the selected FVector from the selected ini config file */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigVector( const FString sectionName, const FString variableName, const FVector value, const EIniFilesList iniFile );
-
-	/** Set the value of the selected FRotator from the selected ini config file */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigRotator( const FString sectionName, const FString variableName, const FRotator value, const EIniFilesList iniFile );
-
-	/** Set the value of the selected FLinearColor from the selected ini config file */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigColor( const FString sectionName, const FString variableName, const FLinearColor value, const EIniFilesList iniFile );
-
-	/** Set the value of the selected FString from the selected ini config file */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigString( const FString sectionName, const FString variableName, const FString value, const EIniFilesList iniFile );
+		static void SetConfigFloat( const FString SectionName, const FString VariableName, const float FloatValue, const EINIFilesList INIFile );
 
 	/** Set the value of the selected FVector2D from the selected ini config file */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
-		static void SetConfigVector2D( const FString sectionName, const FString variableName, const FVector2D value, const EIniFilesList iniFile );
+		static void SetConfigVector2D( const FString SectionName, const FString VariableName, const FVector2D Vec2Value, const EINIFilesList INIFile );
+
+	/** Set the value of the selected FVector from the selected ini config file */
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
+		static void SetConfigVector( const FString SectionName, const FString VariableName, const FVector VecValue, const EINIFilesList INIFile );
+
+	/** Set the value of the selected FVector from the selected ini config file */
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
+		static void SetConfigVector4( const FString SectionName, const FString VariableName, const FVector4 Vec4Value, const EINIFilesList INIFile );
+
+	/** Set the value of the selected FRotator from the selected ini config file */
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
+		static void SetConfigRotator( const FString SectionName, const FString VariableName, const FRotator RotValue, const EINIFilesList INIFile );
+
+	/** Set the value of the selected FLinearColor from the selected ini config file */
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
+		static void SetConfigColor( const FString SectionName, const FString VariableName, const FLinearColor ColorValue, const EINIFilesList INIFile );
+
+	/** Set the value of the selected FString from the selected ini config file */
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Config" )
+		static void SetConfigString( const FString SectionName, const FString VariableName, const FString StrValue, const EINIFilesList INIFile );
 
 };

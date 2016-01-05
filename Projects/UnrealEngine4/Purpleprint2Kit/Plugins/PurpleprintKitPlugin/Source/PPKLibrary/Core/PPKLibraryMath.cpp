@@ -60,10 +60,10 @@ FVector UPPKLibraryMath::FullRotSectorVector( const FVector VectorValue, const F
 					FullRotSector( VectorValue.Z, SectorsNumber.Z ) );
 }
 
-FVector UPPKLibraryMath::FullRotSectorRotator( const FRotator RotatorValue, const FVector SectorsNumber ) {
-	return FVector( FullRotSector( RotatorValue.Roll, SectorsNumber.X ),
-			 FullRotSector( RotatorValue.Pitch, SectorsNumber.Y ),
-			 FullRotSector( RotatorValue.Yaw, SectorsNumber.Z ) );
+FVector UPPKLibraryMath::FullRotSectorRotator( const FRotator RotValue, const FVector SectorsNumber ) {
+	return FVector( FullRotSector( RotValue.Roll, SectorsNumber.X ),
+			 FullRotSector( RotValue.Pitch, SectorsNumber.Y ),
+			 FullRotSector( RotValue.Yaw, SectorsNumber.Z ) );
 }
 
 int32 UPPKLibraryMath::IntCount( const int32 IntValue ) {
@@ -78,83 +78,83 @@ int32 UPPKLibraryMath::FloatCount( const float FloatValue ) {
 	return numValue.Len() - 1;
 }
 
-int32 UPPKLibraryMath::IMakeFullFromHalfRot( const int32 intValue ) {
-	return intValue < 0 ? intValue + 360 : intValue;
+int32 UPPKLibraryMath::IMakeFullFromHalfRot( const int32 IntValue ) {
+	return IntValue < 0 ? IntValue + 360 : IntValue;
 }
 
-float UPPKLibraryMath::FMakeFullFromHalfRot( const float floatValue ) {
-	return floatValue < 0.0f ? floatValue + 360.0f : floatValue;
+float UPPKLibraryMath::FMakeFullFromHalfRot( const float FloatValue ) {
+	return FloatValue < 0.0f ? FloatValue + 360.0f : FloatValue;
 }
 
-int32 UPPKLibraryMath::ICMakeHalfFromFullRot( const int32 intValue ) {
-	return intValue > 180 ? intValue - 360 : intValue;
+int32 UPPKLibraryMath::ICMakeHalfFromFullRot( const int32 IntValue ) {
+	return IntValue > 180 ? IntValue - 360 : IntValue;
 }
 
-float UPPKLibraryMath::FMakeHalfFromFullRot( const float floatValue ) {
-	return floatValue > 180.0f ? floatValue - 360.0f : floatValue;
+float UPPKLibraryMath::FMakeHalfFromFullRot( const float FloatValue ) {
+	return FloatValue > 180.0f ? FloatValue - 360.0f : FloatValue;
 }
 
-FRotator UPPKLibraryMath::MakeFullFromHalfRot( const FRotator rotationValue ) {
+FRotator UPPKLibraryMath::MakeFullFromHalfRot( const FRotator RotValue ) {
 	FRotator value;
-	value.Roll = rotationValue.Roll < 0.0f ? rotationValue.Roll + 360.0f : rotationValue.Roll;
-	value.Pitch = rotationValue.Pitch < 0.0f ? rotationValue.Pitch + 360.0f : rotationValue.Pitch;
-	value.Yaw = rotationValue.Yaw < 0.0f ? rotationValue.Yaw + 360.0f : rotationValue.Yaw;
+	value.Roll = RotValue.Roll < 0.0f ? RotValue.Roll + 360.0f : RotValue.Roll;
+	value.Pitch = RotValue.Pitch < 0.0f ? RotValue.Pitch + 360.0f : RotValue.Pitch;
+	value.Yaw = RotValue.Yaw < 0.0f ? RotValue.Yaw + 360.0f : RotValue.Yaw;
 	return value;
 }
 
-FRotator UPPKLibraryMath::MakeHalfFromFullRot( const FRotator rotationValue ) {
+FRotator UPPKLibraryMath::MakeHalfFromFullRot( const FRotator RotValue ) {
 	FRotator value;
-	value.Roll = rotationValue.Roll > 180.0f ? rotationValue.Roll - 360.0f : rotationValue.Roll;
-	value.Pitch = rotationValue.Pitch > 180.0f ? rotationValue.Pitch - 360.0f : rotationValue.Pitch;
-	value.Yaw = rotationValue.Yaw > 180.0f ? rotationValue.Yaw - 360.0f : rotationValue.Yaw;
+	value.Roll = RotValue.Roll > 180.0f ? RotValue.Roll - 360.0f : RotValue.Roll;
+	value.Pitch = RotValue.Pitch > 180.0f ? RotValue.Pitch - 360.0f : RotValue.Pitch;
+	value.Yaw = RotValue.Yaw > 180.0f ? RotValue.Yaw - 360.0f : RotValue.Yaw;
 	return value;
 }
 
-FVector2D UPPKLibraryMath::V2DMakeFullFromHalfRot( const FVector2D vector2DValue ) {
+FVector2D UPPKLibraryMath::V2DMakeFullFromHalfRot( const FVector2D Vec2Value ) {
 	FVector2D value;
-	value.X = vector2DValue.X < 0.0f ? vector2DValue.X + 360.0f : vector2DValue.X;
-	value.Y = vector2DValue.Y < 0.0f ? vector2DValue.Y + 360.0f : vector2DValue.Y;
+	value.X = Vec2Value.X < 0.0f ? Vec2Value.X + 360.0f : Vec2Value.X;
+	value.Y = Vec2Value.Y < 0.0f ? Vec2Value.Y + 360.0f : Vec2Value.Y;
 	return value;
 }
 
-FVector2D UPPKLibraryMath::V2DMakeHalfFromFullRot( const FVector2D vector2DValue ) {
+FVector2D UPPKLibraryMath::V2DMakeHalfFromFullRot( const FVector2D Vec2Value ) {
 	FVector2D value;
-	value.X = vector2DValue.X > 180.0f ? vector2DValue.X - 360.0f : vector2DValue.X;
-	value.Y = vector2DValue.Y > 180.0f ? vector2DValue.Y - 360.0f : vector2DValue.Y;
+	value.X = Vec2Value.X > 180.0f ? Vec2Value.X - 360.0f : Vec2Value.X;
+	value.Y = Vec2Value.Y > 180.0f ? Vec2Value.Y - 360.0f : Vec2Value.Y;
 	return value;
 }
 
-FVector UPPKLibraryMath::VMakeFullFromHalfRot( const FVector vectorValue ) {
+FVector UPPKLibraryMath::VMakeFullFromHalfRot( const FVector VecValue ) {
 	FVector value;
-	value.X = vectorValue.X < 0.0f ? vectorValue.X + 360.0f : vectorValue.X;
-	value.Y = vectorValue.Y < 0.0f ? vectorValue.Y + 360.0f : vectorValue.Y;
-	value.Z = vectorValue.Z < 0.0f ? vectorValue.Z + 360.0f : vectorValue.Z;
+	value.X = VecValue.X < 0.0f ? VecValue.X + 360.0f : VecValue.X;
+	value.Y = VecValue.Y < 0.0f ? VecValue.Y + 360.0f : VecValue.Y;
+	value.Z = VecValue.Z < 0.0f ? VecValue.Z + 360.0f : VecValue.Z;
 	return value;
 }
 
-FVector UPPKLibraryMath::VMakeHalfFromFullRot( const FVector vectorValue ) {
+FVector UPPKLibraryMath::VMakeHalfFromFullRot( const FVector VecValue ) {
 	FVector value;
-	value.X = vectorValue.X > 180.0f ? vectorValue.X - 360.0f : vectorValue.X;
-	value.Y = vectorValue.Y > 180.0f ? vectorValue.Y - 360.0f : vectorValue.Y;
-	value.Z = vectorValue.Z > 180.0f ? vectorValue.Z - 360.0f : vectorValue.Z;
+	value.X = VecValue.X > 180.0f ? VecValue.X - 360.0f : VecValue.X;
+	value.Y = VecValue.Y > 180.0f ? VecValue.Y - 360.0f : VecValue.Y;
+	value.Z = VecValue.Z > 180.0f ? VecValue.Z - 360.0f : VecValue.Z;
 	return value;
 }
 
-FVector4 UPPKLibraryMath::V4MakeFullFromHalfRot( const FVector4 vector4Value ) {
+FVector4 UPPKLibraryMath::V4MakeFullFromHalfRot( const FVector4 Vec4Value ) {
 	FVector4 value;
-	value.X = vector4Value.X < 0.0f ? vector4Value.X + 360.0f : vector4Value.X;
-	value.Y = vector4Value.Y < 0.0f ? vector4Value.Y + 360.0f : vector4Value.Y;
-	value.Z = vector4Value.Z < 0.0f ? vector4Value.Z + 360.0f : vector4Value.Z;
-	value.W = vector4Value.W < 0.0f ? vector4Value.W + 360.0f : vector4Value.W;
+	value.X = Vec4Value.X < 0.0f ? Vec4Value.X + 360.0f : Vec4Value.X;
+	value.Y = Vec4Value.Y < 0.0f ? Vec4Value.Y + 360.0f : Vec4Value.Y;
+	value.Z = Vec4Value.Z < 0.0f ? Vec4Value.Z + 360.0f : Vec4Value.Z;
+	value.W = Vec4Value.W < 0.0f ? Vec4Value.W + 360.0f : Vec4Value.W;
 	return value;
 }
 
-FVector4 UPPKLibraryMath::V4MakeHalfFromFullRot( const FVector4 vector4Value ) {
+FVector4 UPPKLibraryMath::V4MakeHalfFromFullRot( const FVector4 Vec4Value ) {
 	FVector4 value;
-	value.X = vector4Value.X > 180.0f ? vector4Value.X - 360.0f : vector4Value.X;
-	value.Y = vector4Value.Y > 180.0f ? vector4Value.Y - 360.0f : vector4Value.Y;
-	value.Z = vector4Value.Z > 180.0f ? vector4Value.Z - 360.0f : vector4Value.Z;
-	value.W = vector4Value.W > 180.0f ? vector4Value.W - 360.0f : vector4Value.W;
+	value.X = Vec4Value.X > 180.0f ? Vec4Value.X - 360.0f : Vec4Value.X;
+	value.Y = Vec4Value.Y > 180.0f ? Vec4Value.Y - 360.0f : Vec4Value.Y;
+	value.Z = Vec4Value.Z > 180.0f ? Vec4Value.Z - 360.0f : Vec4Value.Z;
+	value.W = Vec4Value.W > 180.0f ? Vec4Value.W - 360.0f : Vec4Value.W;
 	return value;
 }
 

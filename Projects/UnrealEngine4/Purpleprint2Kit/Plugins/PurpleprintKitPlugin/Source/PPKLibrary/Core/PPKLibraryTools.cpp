@@ -42,7 +42,7 @@ UPPKLibraryTools::UPPKLibraryTools( const class FObjectInitializer& ObjectInitia
 }
 
 void UPPKLibraryTools::PrintBoolArray( const TArray<bool> BoolArray, const bool SingleString, const FString& Text, const bool NoText,
-									   float Duration ) {
+									   float Duration, const bool VisualMode ) {
 #if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
 	if ( NoText ) { Text == ""; }
 	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
@@ -52,7 +52,7 @@ void UPPKLibraryTools::PrintBoolArray( const TArray<bool> BoolArray, const bool 
 				GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ( BoolArray[i] ? TEXT( "true" ) : TEXT( "false" ) ) );
 			}
 		} else {
-			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayBoolToString( BoolArray ) );
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayBoolToString( BoolArray, VisualMode ) );
 		}
 	} else {
 		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The Bool Array is empty" ) );
@@ -117,20 +117,20 @@ void UPPKLibraryTools::PrintFloatArray( const TArray<float> FloatArray, const bo
 #endif
 }
 
-void UPPKLibraryTools::PrintVector2DArray( const TArray<FVector2D> Vector2DArray, const bool SingleString, const FString& Text,
+void UPPKLibraryTools::PrintVector2DArray( const TArray<FVector2D> Vec2Array, const bool SingleString, const FString& Text,
 										   const bool NoText, float Duration ) {
 #if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
 	if ( NoText ) { Text == ""; }
 	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
-	if ( Vector2DArray.Num() != 0 ) {
+	if ( Vec2Array.Num() != 0 ) {
 		if ( !SingleString ) {
-			for ( int32 i = 0; i < Vector2DArray.Num(); i++ ) {
+			for ( int32 i = 0; i < Vec2Array.Num(); i++ ) {
 				GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + "( " +
-												  FString::SanitizeFloat( Vector2DArray[i].X ) + " , " + 
-												  FString::SanitizeFloat( Vector2DArray[i].Y ) + " )" );
+												  FString::SanitizeFloat( Vec2Array[i].X ) + " , " + 
+												  FString::SanitizeFloat( Vec2Array[i].Y ) + " )" );
 			}
 		} else {
-			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayVector2DToString( Vector2DArray ) );
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayVector2DToString( Vec2Array ) );
 		}
 	} else {
 		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The FVector2D Array is empty" ) );
@@ -138,21 +138,21 @@ void UPPKLibraryTools::PrintVector2DArray( const TArray<FVector2D> Vector2DArray
 #endif
 }
 
-void UPPKLibraryTools::PrintVectorArray( const TArray<FVector> VectorArray, const bool SingleString, const FString& Text, const bool NoText,
+void UPPKLibraryTools::PrintVectorArray( const TArray<FVector> VecArray, const bool SingleString, const FString& Text, const bool NoText,
 										 float Duration ) {
 #if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
 	if ( NoText ) { Text == ""; }
 	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
-	if ( VectorArray.Num() != 0 ) {
+	if ( VecArray.Num() != 0 ) {
 		if ( !SingleString ) {
-			for ( int32 i = 0; i < VectorArray.Num(); i++ ) {
+			for ( int32 i = 0; i < VecArray.Num(); i++ ) {
 				GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + "( " +
-												  FString::SanitizeFloat( VectorArray[i].X ) + " , " + 
-												  FString::SanitizeFloat( VectorArray[i].Y ) + " , " + 
-												  FString::SanitizeFloat( VectorArray[i].Z ) + " )" );
+												  FString::SanitizeFloat( VecArray[i].X ) + " , " + 
+												  FString::SanitizeFloat( VecArray[i].Y ) + " , " + 
+												  FString::SanitizeFloat( VecArray[i].Z ) + " )" );
 			}
 		} else {
-			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayVectorToString( VectorArray ) );
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayVectorToString( VecArray ) );
 		}
 	} else {
 		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The FVector Array is empty" ) );
@@ -160,22 +160,22 @@ void UPPKLibraryTools::PrintVectorArray( const TArray<FVector> VectorArray, cons
 #endif
 }
 
-void UPPKLibraryTools::PrintVector4Array( const TArray<FVector4> Vector4Array, const bool SingleString, const FString& Text,
+void UPPKLibraryTools::PrintVector4Array( const TArray<FVector4> Vec4Array, const bool SingleString, const FString& Text,
 										  const bool NoText, float Duration ) {
 #if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
 	if ( NoText ) { Text == ""; }
 	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
-	if ( Vector4Array.Num() != 0 ) {
+	if ( Vec4Array.Num() != 0 ) {
 		if ( !SingleString ) {
-			for ( int32 i = 0; i < Vector4Array.Num(); i++ ) {
+			for ( int32 i = 0; i < Vec4Array.Num(); i++ ) {
 				GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, Text + "( " +
-												  FString::SanitizeFloat( Vector4Array[i].X ) + " , " +
-												  FString::SanitizeFloat( Vector4Array[i].Y ) + " , " +
-												  FString::SanitizeFloat( Vector4Array[i].Z ) + " , " +
-												  FString::SanitizeFloat( Vector4Array[i].W ) + " )" );
+												  FString::SanitizeFloat( Vec4Array[i].X ) + " , " +
+												  FString::SanitizeFloat( Vec4Array[i].Y ) + " , " +
+												  FString::SanitizeFloat( Vec4Array[i].Z ) + " , " +
+												  FString::SanitizeFloat( Vec4Array[i].W ) + " )" );
 			}
 		} else {
-			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayVector4ToString( Vector4Array ) );
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayVector4ToString( Vec4Array ) );
 		}
 	} else {
 		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The FVector4 Array is empty" ) );
@@ -183,21 +183,21 @@ void UPPKLibraryTools::PrintVector4Array( const TArray<FVector4> Vector4Array, c
 #endif
 }
 
-void UPPKLibraryTools::PrintRotatorArray( const TArray<FRotator> RotatorArray, const bool SingleString, const FString& Text,
+void UPPKLibraryTools::PrintRotatorArray( const TArray<FRotator> RotArray, const bool SingleString, const FString& Text,
 										  const bool NoText, float Duration ) {
 #if !( UE_BUILD_TEST || UE_BUILD_SHIPPING ) // Do not Print in Shipping or Test builds
 	if ( NoText ) { Text == ""; }
 	if ( GConfig && Duration < 0 ) { GConfig->GetFloat( TEXT( "Kismet" ), TEXT( "PrintStringDuration" ), Duration, GEngineIni ); }
-	if ( RotatorArray.Num() != 0 ) {
+	if ( RotArray.Num() != 0 ) {
 		if ( !SingleString ) {
-			for ( int32 i = 0; i < RotatorArray.Num(); i++ ) {
+			for ( int32 i = 0; i < RotArray.Num(); i++ ) {
 				GEngine->AddOnScreenDebugMessage( -1, 10.f, FColor::Green, Text + "( " +
-												  FString::SanitizeFloat( RotatorArray[i].Pitch ) + " , " +
-												  FString::SanitizeFloat( RotatorArray[i].Roll ) + " , " +
-												  FString::SanitizeFloat( RotatorArray[i].Yaw ) + " )" );
+												  FString::SanitizeFloat( RotArray[i].Pitch ) + " , " +
+												  FString::SanitizeFloat( RotArray[i].Roll ) + " , " +
+												  FString::SanitizeFloat( RotArray[i].Yaw ) + " )" );
 			}
 		} else {
-			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayRotatorToString( RotatorArray ) );
+			GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Green, Text + ArrayRotatorToString( RotArray ) );
 		}
 	} else {
 		GEngine->AddOnScreenDebugMessage( -1, Duration, FColor::Yellow, TEXT( "The FRotator Array is empty" ) );
@@ -207,15 +207,26 @@ void UPPKLibraryTools::PrintRotatorArray( const TArray<FRotator> RotatorArray, c
 
 
 
-FString UPPKLibraryTools::ArrayBoolToString( const TArray<bool> BoolArray ) {
+FString UPPKLibraryTools::ArrayBoolToString( const TArray<bool> BoolArray, const bool VisualMode ) {
 	FString tempString = TEXT( "Empty" );
 	if ( BoolArray.Num() != 0 ) {
-		tempString = "{ ";
-		for ( int32 i = 0; i < BoolArray.Num(); i++ ) {
-			if ( i == 0 ) { tempString = tempString + ( BoolArray[i] ? TEXT( "true" ) : TEXT( "false" ) ); 
-			} else { tempString = tempString + ", " + ( BoolArray[i] ? TEXT( "true" ) : TEXT( "false" ) ); }
+		if ( VisualMode ) {
+			tempString = "{ ";
+			for ( int32 i = 0; i < BoolArray.Num(); i++ ) {
+				if ( i == 0 ) {
+					tempString = tempString + ( BoolArray[i] ? TEXT( "[X]" ) : TEXT( "[ ]" ) );
+				} else { tempString = tempString + ", " + ( BoolArray[i] ? TEXT( "[X]" ) : TEXT( "[ ]" ) ); }
+			}
+			tempString = tempString + " }";
+		} else {
+			tempString = "{ ";
+			for ( int32 i = 0; i < BoolArray.Num(); i++ ) {
+				if ( i == 0 ) {
+					tempString = tempString + ( BoolArray[i] ? TEXT( "true" ) : TEXT( "false" ) );
+				} else { tempString = tempString + ", " + ( BoolArray[i] ? TEXT( "true" ) : TEXT( "false" ) ); }
+			}
+			tempString = tempString + " }";
 		}
-		tempString = tempString + " }";
 	}
 	return tempString;
 }
@@ -263,19 +274,19 @@ FString UPPKLibraryTools::ArrayFloatToString( const TArray<float> FloatArray ) {
 }
 
 
-FString UPPKLibraryTools::ArrayVector2DToString( const TArray<FVector2D> Vector2DArray ) {
+FString UPPKLibraryTools::ArrayVector2DToString( const TArray<FVector2D> Vec2Array ) {
 	FString tempString = TEXT( "Empty" );
-	if ( Vector2DArray.Num() != 0 ) {
+	if ( Vec2Array.Num() != 0 ) {
 		tempString = "{ ";
-		for ( int32 i = 0; i < Vector2DArray.Num(); i++ ) {
+		for ( int32 i = 0; i < Vec2Array.Num(); i++ ) {
 			if ( i == 0 ) { 
 				tempString = tempString + "( " +
-				FString::SanitizeFloat( Vector2DArray[i].X ) + " , " +
-				FString::SanitizeFloat( Vector2DArray[i].Y ) + " )";
+				FString::SanitizeFloat( Vec2Array[i].X ) + " , " +
+				FString::SanitizeFloat( Vec2Array[i].Y ) + " )";
 			} else { 
 				tempString = tempString + ", " + "( " +
-				FString::SanitizeFloat( Vector2DArray[i].X ) + " , " +
-				FString::SanitizeFloat( Vector2DArray[i].Y ) + " )";
+				FString::SanitizeFloat( Vec2Array[i].X ) + " , " +
+				FString::SanitizeFloat( Vec2Array[i].Y ) + " )";
 			}
 		}
 		tempString = tempString + " }";
@@ -284,21 +295,21 @@ FString UPPKLibraryTools::ArrayVector2DToString( const TArray<FVector2D> Vector2
 }
 
 
-FString UPPKLibraryTools::ArrayVectorToString( const TArray<FVector> VectorArray ) {
+FString UPPKLibraryTools::ArrayVectorToString( const TArray<FVector> VecArray ) {
 	FString tempString = TEXT( "Empty" );
-	if ( VectorArray.Num() != 0 ) {
+	if ( VecArray.Num() != 0 ) {
 		tempString = "{ ";
-		for ( int32 i = 0; i < VectorArray.Num(); i++ ) {
+		for ( int32 i = 0; i < VecArray.Num(); i++ ) {
 			if ( i == 0 ) { 
 				tempString = tempString + "( " +
-					FString::SanitizeFloat( VectorArray[i].X ) + " , " +
-					FString::SanitizeFloat( VectorArray[i].Y ) + " , " +
-					FString::SanitizeFloat( VectorArray[i].Z ) + " )";
+					FString::SanitizeFloat( VecArray[i].X ) + " , " +
+					FString::SanitizeFloat( VecArray[i].Y ) + " , " +
+					FString::SanitizeFloat( VecArray[i].Z ) + " )";
 			} else { 
 				tempString = tempString + ", " + "( " +
-					FString::SanitizeFloat( VectorArray[i].X ) + " , " +
-					FString::SanitizeFloat( VectorArray[i].Y ) + " , " +
-					FString::SanitizeFloat( VectorArray[i].Z ) + " )"; }
+					FString::SanitizeFloat( VecArray[i].X ) + " , " +
+					FString::SanitizeFloat( VecArray[i].Y ) + " , " +
+					FString::SanitizeFloat( VecArray[i].Z ) + " )"; }
 		}
 		tempString = tempString + " }";
 	}
@@ -306,23 +317,23 @@ FString UPPKLibraryTools::ArrayVectorToString( const TArray<FVector> VectorArray
 }
 
 
-FString UPPKLibraryTools::ArrayVector4ToString( const TArray<FVector4> Vector4Array ) {
+FString UPPKLibraryTools::ArrayVector4ToString( const TArray<FVector4> Vec4Array ) {
 	FString tempString = TEXT( "Empty" );
-	if ( Vector4Array.Num() != 0 ) {
+	if ( Vec4Array.Num() != 0 ) {
 		tempString = "{ ";
-		for ( int32 i = 0; i < Vector4Array.Num(); i++ ) {
+		for ( int32 i = 0; i < Vec4Array.Num(); i++ ) {
 			if ( i == 0 ) { 
 				tempString = tempString + "( " +
-					FString::SanitizeFloat( Vector4Array[i].X ) + " , " +
-					FString::SanitizeFloat( Vector4Array[i].Y ) + " , " +
-					FString::SanitizeFloat( Vector4Array[i].Z ) + " , " +
-					FString::SanitizeFloat( Vector4Array[i].W ) + " )";
+					FString::SanitizeFloat( Vec4Array[i].X ) + " , " +
+					FString::SanitizeFloat( Vec4Array[i].Y ) + " , " +
+					FString::SanitizeFloat( Vec4Array[i].Z ) + " , " +
+					FString::SanitizeFloat( Vec4Array[i].W ) + " )";
 			} else { 
 				tempString = tempString + ", " + "( " +
-					FString::SanitizeFloat( Vector4Array[i].X ) + " , " +
-					FString::SanitizeFloat( Vector4Array[i].Y ) + " , " +
-					FString::SanitizeFloat( Vector4Array[i].Z ) + " , " +
-					FString::SanitizeFloat( Vector4Array[i].W ) + " )"; }
+					FString::SanitizeFloat( Vec4Array[i].X ) + " , " +
+					FString::SanitizeFloat( Vec4Array[i].Y ) + " , " +
+					FString::SanitizeFloat( Vec4Array[i].Z ) + " , " +
+					FString::SanitizeFloat( Vec4Array[i].W ) + " )"; }
 		}
 		tempString = tempString + " }";
 	}
@@ -330,21 +341,21 @@ FString UPPKLibraryTools::ArrayVector4ToString( const TArray<FVector4> Vector4Ar
 }
 
 
-FString UPPKLibraryTools::ArrayRotatorToString( const TArray<FRotator> RotatorArray ) {
+FString UPPKLibraryTools::ArrayRotatorToString( const TArray<FRotator> RotArray ) {
 	FString tempString = TEXT( "Empty" );
-	if ( RotatorArray.Num() != 0 ) {
+	if ( RotArray.Num() != 0 ) {
 		tempString = "{ ";
-		for ( int32 i = 0; i < RotatorArray.Num(); i++ ) {
+		for ( int32 i = 0; i < RotArray.Num(); i++ ) {
 			if ( i == 0 ) { 
 				tempString = tempString + "( " +
-					FString::SanitizeFloat( RotatorArray[i].Pitch ) + " , " +
-					FString::SanitizeFloat( RotatorArray[i].Roll ) + " , " +
-					FString::SanitizeFloat( RotatorArray[i].Yaw ) + " )";
+					FString::SanitizeFloat( RotArray[i].Pitch ) + " , " +
+					FString::SanitizeFloat( RotArray[i].Roll ) + " , " +
+					FString::SanitizeFloat( RotArray[i].Yaw ) + " )";
 			} else { 
 				tempString = tempString + ", " + "( " +
-					FString::SanitizeFloat( RotatorArray[i].Pitch ) + " , " +
-					FString::SanitizeFloat( RotatorArray[i].Roll ) + " , " +
-					FString::SanitizeFloat( RotatorArray[i].Yaw ) + " )"; }
+					FString::SanitizeFloat( RotArray[i].Pitch ) + " , " +
+					FString::SanitizeFloat( RotArray[i].Roll ) + " , " +
+					FString::SanitizeFloat( RotArray[i].Yaw ) + " )"; }
 		}
 		tempString = tempString + " }";
 	}
@@ -352,14 +363,14 @@ FString UPPKLibraryTools::ArrayRotatorToString( const TArray<FRotator> RotatorAr
 }
 
 
-float UPPKLibraryTools::MakeFloatFromInts( const int32 A, const int32 B ) {
+float UPPKLibraryTools::MakeFloatFromIntegers( const int32 A, const int32 B ) {
 	float value = A;
 	int32 m = 1;
 	for ( int32 i = 0; i <= UPPKLibraryMath::IntCount( B ); ++i ) { m *= 10; }
 	return value + ( B / m );
 }
 
-int32 UPPKLibraryTools::DivideFloatIntoInts( const float Ref, int32& B ) {
+int32 UPPKLibraryTools::DivideFloatIntoIntegers( const float Ref, int32& B ) {
 	B = FMath::Frac( Ref );
 	return FMath::TruncToInt( Ref );
 }
@@ -384,362 +395,439 @@ FVector4 UPPKLibraryTools::FloatSplitToVector4( const float FloatValue ) {
 	return FVector4( FMath::TruncToInt( FloatValue ), FMath::Frac( FloatValue ), 0.0f, 0.0f );
 }
 
-FVector2D UPPKLibraryTools::VectorToVector2D( const FVector &VectorValue ) {
-	return FVector2D( VectorValue.X, VectorValue.Y );
+FVector2D UPPKLibraryTools::VectorToVector2D( const FVector &VecValue ) {
+	return FVector2D( VecValue.X, VecValue.Y );
 }
 
-FVector2D UPPKLibraryTools::Vector4ToVector2D( const FVector4 &Vector4Value ) {
-	return FVector2D( Vector4Value.X, Vector4Value.Y );
+FVector2D UPPKLibraryTools::Vector4ToVector2D( const FVector4 &Vec4Value ) {
+	return FVector2D( Vec4Value.X, Vec4Value.Y );
 }
 
-FVector UPPKLibraryTools::Vector2DToVector( const FVector2D &Vector2DValue ) {
-	return FVector( Vector2DValue.X, Vector2DValue.Y, 0.0f );
+FVector UPPKLibraryTools::Vector2DToVector( const FVector2D &Vec2Value ) {
+	return FVector( Vec2Value.X, Vec2Value.Y, 0.0f );
 }
 
-FVector UPPKLibraryTools::Vector4ToVector( const FVector4 &Vector4Value ) {
-	return FVector( Vector4Value.X, Vector4Value.Y, Vector4Value.Z );
+FVector UPPKLibraryTools::Vector4ToVector( const FVector4 &Vec4Value ) {
+	return FVector( Vec4Value.X, Vec4Value.Y, Vec4Value.Z );
 }
 
-FVector4 UPPKLibraryTools::Vector2DToVector4( const FVector2D &Vector2DValue ) {
-	return FVector4( Vector2DValue.X, Vector2DValue.Y, 0.0f, 0.0f );
+FVector4 UPPKLibraryTools::Vector2DToVector4( const FVector2D &Vec2Value ) {
+	return FVector4( Vec2Value.X, Vec2Value.Y, 0.0f, 0.0f );
 }
 
-FVector4 UPPKLibraryTools::VectorToVector4( const FVector &VectorValue ) {
-	return FVector4( VectorValue.X, VectorValue.Y, VectorValue.Z, 0.0f );
+FVector4 UPPKLibraryTools::VectorToVector4( const FVector &VecValue ) {
+	return FVector4( VecValue.X, VecValue.Y, VecValue.Z, 0.0f );
 }
 
-FRotator UPPKLibraryTools::RotatorOrderInvert( const FRotator &rotatorValue ) {
-	return FRotator( rotatorValue.Roll, rotatorValue.Yaw, rotatorValue.Pitch );
+FRotator UPPKLibraryTools::RotatorOrderInvert( const FRotator &RotValue ) {
+	return FRotator( RotValue.Roll, RotValue.Yaw, RotValue.Pitch );
 }
 
-FVector2D UPPKLibraryTools::Vector2DOrderInvert( const FVector2D &vector2DValue ) {
-	return FVector2D( vector2DValue.Y, vector2DValue.X );
+FVector2D UPPKLibraryTools::Vector2DOrderInvert( const FVector2D &Vec2Value ) {
+	return FVector2D( Vec2Value.Y, Vec2Value.X );
 }
 
-FVector UPPKLibraryTools::VectorOrderInvert( const FVector &vectorValue ) {
-	return FVector( vectorValue.Z, vectorValue.Y, vectorValue.X );
+FVector UPPKLibraryTools::VectorOrderInvert( const FVector &VecValue ) {
+	return FVector( VecValue.Z, VecValue.Y, VecValue.X );
 }
 
-FVector4 UPPKLibraryTools::Vector4OrderInvert( const FVector4 &vector4Value ) {
-	return FVector4( vector4Value.W, vector4Value.Z, vector4Value.Y, vector4Value.X );
+FVector4 UPPKLibraryTools::Vector4OrderInvert( const FVector4 &Vec4Value ) {
+	return FVector4( Vec4Value.W, Vec4Value.Z, Vec4Value.Y, Vec4Value.X );
 }
 
-FRotator UPPKLibraryTools::RotatorOrderRight( const FRotator &rotatorValue ) {
-	return FRotator( rotatorValue.Roll, rotatorValue.Pitch, rotatorValue.Yaw );
+FRotator UPPKLibraryTools::RotatorOrderRight( const FRotator &RotValue ) {
+	return FRotator( RotValue.Roll, RotValue.Pitch, RotValue.Yaw );
 }
 
-FVector UPPKLibraryTools::VectorOrderRight( const FVector &vectorValue ) {
-	return FVector( vectorValue.Z, vectorValue.X, vectorValue.Y );
+FVector UPPKLibraryTools::VectorOrderRight( const FVector &VecValue ) {
+	return FVector( VecValue.Z, VecValue.X, VecValue.Y );
 }
 
-FVector4 UPPKLibraryTools::Vector4OrderRight( const FVector4 &vector4Value ) {
-	return FVector4( vector4Value.W, vector4Value.X, vector4Value.Y, vector4Value.Z );
+FVector4 UPPKLibraryTools::Vector4OrderRight( const FVector4 &Vec4Value ) {
+	return FVector4( Vec4Value.W, Vec4Value.X, Vec4Value.Y, Vec4Value.Z );
 }
 
-FRotator UPPKLibraryTools::RotatorOrderLeft( const FRotator &rotatorValue ) {
-	return FRotator( rotatorValue.Yaw, rotatorValue.Roll, rotatorValue.Pitch );
+FRotator UPPKLibraryTools::RotatorOrderLeft( const FRotator &RotValue ) {
+	return FRotator( RotValue.Yaw, RotValue.Roll, RotValue.Pitch );
 }
 
-FVector UPPKLibraryTools::VectorOrderLeft( const FVector &vectorValue ) {
-	return FVector( vectorValue.Y, vectorValue.Z, vectorValue.X );
+FVector UPPKLibraryTools::VectorOrderLeft( const FVector &VecValue ) {
+	return FVector( VecValue.Y, VecValue.Z, VecValue.X );
 }
 
-FVector4 UPPKLibraryTools::Vector4OrderLeft( const FVector4 &vector4Value ) {
-	return FVector4( vector4Value.Y, vector4Value.Z, vector4Value.W, vector4Value.X );
+FVector4 UPPKLibraryTools::Vector4OrderLeft( const FVector4 &Vec4Value ) {
+	return FVector4( Vec4Value.Y, Vec4Value.Z, Vec4Value.W, Vec4Value.X );
 }
 
-bool UPPKLibraryTools::GetConfigBool( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
+bool UPPKLibraryTools::GetConfigBool( const FString SectionName, const FString VariableName, const EINIFilesList INIFile ) {
 	if ( !GConfig ) return false;
 
 	bool value = false;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetBool( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetBool( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetBool( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetBool( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetBool( *sectionName, *variableName, value, GEngineIni );
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->GetBool( *SectionName, *VariableName, value, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->GetBool( *SectionName, *VariableName, value, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->GetBool( *SectionName, *VariableName, value, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->GetBool( *SectionName, *VariableName, value, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->GetBool( *SectionName, *VariableName, value, GEngineIni );
 	}
 	return value;
 }
 
-int32 UPPKLibraryTools::GetConfigInt( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
+uint8 UPPKLibraryTools::GetConfigByte( const FString SectionName, const FString VariableName, const EINIFilesList INIFile ) {
+	if ( !GConfig ) return 0;
+
+	// PR GetByte
+	int32 value = 0;
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->GetInt( *SectionName, *VariableName, value, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->GetInt( *SectionName, *VariableName, value, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->GetInt( *SectionName, *VariableName, value, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->GetInt( *SectionName, *VariableName, value, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->GetInt( *SectionName, *VariableName, value, GEngineIni );
+	}
+	return ( value < 0 ) ? 0 : ( value > sizeof( uint8 ) ) ? sizeof( uint8 ) : value;
+}
+
+int32 UPPKLibraryTools::GetConfigInteger( const FString SectionName, const FString VariableName, const EINIFilesList INIFile ) {
 	if ( !GConfig ) return 0;
 
 	int32 value = 0;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetInt( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetInt( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetInt( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetInt( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetInt( *sectionName, *variableName, value, GEngineIni );
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->GetInt( *SectionName, *VariableName, value, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->GetInt( *SectionName, *VariableName, value, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->GetInt( *SectionName, *VariableName, value, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->GetInt( *SectionName, *VariableName, value, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->GetInt( *SectionName, *VariableName, value, GEngineIni );
 	}
 	return value;
 }
 
-float UPPKLibraryTools::GetConfigFloat( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
+float UPPKLibraryTools::GetConfigFloat( const FString SectionName, const FString VariableName, const EINIFilesList INIFile ) {
 	if ( !GConfig ) return 0;
 
 	float value = 0.0f;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetFloat( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetFloat( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetFloat( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetFloat( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetFloat( *sectionName, *variableName, value, GEngineIni );
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->GetFloat( *SectionName, *VariableName, value, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->GetFloat( *SectionName, *VariableName, value, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->GetFloat( *SectionName, *VariableName, value, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->GetFloat( *SectionName, *VariableName, value, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->GetFloat( *SectionName, *VariableName, value, GEngineIni );
 	}
 	return value;
 }
 
-FVector UPPKLibraryTools::GetConfigVector( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return FVector::ZeroVector;
-
-	FVector value = FVector::ZeroVector;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetVector( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetVector( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetVector( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetVector( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetVector( *sectionName, *variableName, value, GEngineIni );
-	}
-	return value;
-}
-
-FRotator UPPKLibraryTools::GetConfigRotator( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return FRotator::ZeroRotator;
-
-	FRotator value = FRotator::ZeroRotator;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetRotator( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetRotator( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetRotator( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetRotator( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetRotator( *sectionName, *variableName, value, GEngineIni );
-	}
-	return value;
-}
-
-FLinearColor UPPKLibraryTools::GetConfigColor( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return FColor::Black;
-
-	FColor value = FColor::Black;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetColor( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetColor( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetColor( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetColor( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetColor( *sectionName, *variableName, value, GEngineIni );
-	}
-	return FLinearColor( value );
-}
-
-FString UPPKLibraryTools::GetConfigString( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
-	if ( !GConfig ) return "";
-
-	FString value = "";
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetString( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetString( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetString( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetString( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetString( *sectionName, *variableName, value, GEngineIni );
-	}
-	return value;
-}
-
-FVector2D UPPKLibraryTools::GetConfigVector2D( const FString sectionName, const FString variableName, const EIniFilesList iniFile ) {
+FVector2D UPPKLibraryTools::GetConfigVector2D( const FString SectionName, const FString VariableName, const EINIFilesList INIFile ) {
 	if ( !GConfig ) return FVector2D::ZeroVector;
 
 	FVector2D value = FVector2D::ZeroVector;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->GetVector2D( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->GetVector2D( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->GetVector2D( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->GetVector2D( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->GetVector2D( *sectionName, *variableName, value, GEngineIni );
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->GetVector2D( *SectionName, *VariableName, value, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->GetVector2D( *SectionName, *VariableName, value, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->GetVector2D( *SectionName, *VariableName, value, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->GetVector2D( *SectionName, *VariableName, value, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->GetVector2D( *SectionName, *VariableName, value, GEngineIni );
 	}
 	return FVector2D( value.X, value.Y );
 }
 
-void UPPKLibraryTools::SetConfigBool( const FString sectionName, const FString variableName, const bool value, 
-									  const EIniFilesList iniFile ) {
+FVector UPPKLibraryTools::GetConfigVector( const FString SectionName, const FString VariableName, const EINIFilesList INIFile ) {
+	if ( !GConfig ) return FVector::ZeroVector;
+
+	FVector value = FVector::ZeroVector;
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->GetVector( *SectionName, *VariableName, value, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->GetVector( *SectionName, *VariableName, value, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->GetVector( *SectionName, *VariableName, value, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->GetVector( *SectionName, *VariableName, value, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->GetVector( *SectionName, *VariableName, value, GEngineIni );
+	}
+	return value;
+}
+
+FVector4 UPPKLibraryTools::GetConfigVector4( const FString SectionName, const FString VariableName, const EINIFilesList INIFile ) {
+	if ( !GConfig ) return FVector4( 0.f, 0.f, 0.f, 0.f );
+
+	// PR FVector4::ZeroVector
+	FVector4 value = FVector4( 0.f, 0.f, 0.f, 0.f );
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->GetVector4( *SectionName, *VariableName, value, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->GetVector4( *SectionName, *VariableName, value, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->GetVector4( *SectionName, *VariableName, value, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->GetVector4( *SectionName, *VariableName, value, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->GetVector4( *SectionName, *VariableName, value, GEngineIni );
+	}
+	return value;
+}
+
+FRotator UPPKLibraryTools::GetConfigRotator( const FString SectionName, const FString VariableName, const EINIFilesList INIFile ) {
+	if ( !GConfig ) return FRotator::ZeroRotator;
+
+	FRotator value = FRotator::ZeroRotator;
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->GetRotator( *SectionName, *VariableName, value, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->GetRotator( *SectionName, *VariableName, value, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->GetRotator( *SectionName, *VariableName, value, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->GetRotator( *SectionName, *VariableName, value, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->GetRotator( *SectionName, *VariableName, value, GEngineIni );
+	}
+	return value;
+}
+
+FLinearColor UPPKLibraryTools::GetConfigColor( const FString SectionName, const FString VariableName, const EINIFilesList INIFile ) {
+	if ( !GConfig ) return FColor::Black;
+
+	FColor value = FColor::Black;
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->GetColor( *SectionName, *VariableName, value, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->GetColor( *SectionName, *VariableName, value, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->GetColor( *SectionName, *VariableName, value, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->GetColor( *SectionName, *VariableName, value, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->GetColor( *SectionName, *VariableName, value, GEngineIni );
+	}
+	return FLinearColor( value );
+}
+
+FString UPPKLibraryTools::GetConfigString( const FString SectionName, const FString VariableName, const EINIFilesList INIFile ) {
+	if ( !GConfig ) return "";
+
+	FString value = "";
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->GetString( *SectionName, *VariableName, value, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->GetString( *SectionName, *VariableName, value, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->GetString( *SectionName, *VariableName, value, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->GetString( *SectionName, *VariableName, value, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->GetString( *SectionName, *VariableName, value, GEngineIni );
+	}
+	return value;
+}
+
+void UPPKLibraryTools::SetConfigBool( const FString SectionName, const FString VariableName, const bool BoolValue, 
+									  const EINIFilesList INIFile ) {
 	if ( !GConfig ) return;
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetBool( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetBool( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetBool( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetBool( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetBool( *sectionName, *variableName, value, GEngineIni );
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->SetBool( *SectionName, *VariableName, BoolValue, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->SetBool( *SectionName, *VariableName, BoolValue, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->SetBool( *SectionName, *VariableName, BoolValue, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->SetBool( *SectionName, *VariableName, BoolValue, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->SetBool( *SectionName, *VariableName, BoolValue, GEngineIni );
 	}
 
 }
 
-void UPPKLibraryTools::SetConfigInt( const FString sectionName, const FString variableName, const int32 value, 
-									 const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigByte( const FString SectionName, const FString VariableName, const uint8 ByteValue,
+										 const EINIFilesList INIFile ) {
 	if ( !GConfig ) return;
 
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetInt( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetInt( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetInt( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetInt( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetInt( *sectionName, *variableName, value, GEngineIni );
+	// PR SetByte
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->SetInt( *SectionName, *VariableName, ByteValue, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->SetInt( *SectionName, *VariableName, ByteValue, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->SetInt( *SectionName, *VariableName, ByteValue, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->SetInt( *SectionName, *VariableName, ByteValue, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->SetInt( *SectionName, *VariableName, ByteValue, GEngineIni );
 	}
 }
 
-void UPPKLibraryTools::SetConfigFloat( const FString sectionName, const FString variableName, const float value, 
-									   const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigInteger( const FString SectionName, const FString VariableName, const int32 IntValue, 
+									 const EINIFilesList INIFile ) {
 	if ( !GConfig ) return;
 
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetFloat( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetFloat( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetFloat( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetFloat( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetFloat( *sectionName, *variableName, value, GEngineIni );
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->SetInt( *SectionName, *VariableName, IntValue, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->SetInt( *SectionName, *VariableName, IntValue, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->SetInt( *SectionName, *VariableName, IntValue, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->SetInt( *SectionName, *VariableName, IntValue, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->SetInt( *SectionName, *VariableName, IntValue, GEngineIni );
 	}
 }
 
-void UPPKLibraryTools::SetConfigVector( const FString sectionName, const FString variableName, const FVector value, 
-										const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigFloat( const FString SectionName, const FString VariableName, const float FloatValue, 
+									   const EINIFilesList INIFile ) {
 	if ( !GConfig ) return;
 
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetVector( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetVector( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetVector( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetVector( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetVector( *sectionName, *variableName, value, GEngineIni );
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->SetFloat( *SectionName, *VariableName, FloatValue, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->SetFloat( *SectionName, *VariableName, FloatValue, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->SetFloat( *SectionName, *VariableName, FloatValue, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->SetFloat( *SectionName, *VariableName, FloatValue, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->SetFloat( *SectionName, *VariableName, FloatValue, GEngineIni );
 	}
 }
 
-void UPPKLibraryTools::SetConfigRotator( const FString sectionName, const FString variableName, const FRotator value, 
-										 const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigVector2D( const FString SectionName, const FString VariableName, const FVector2D Vec2value,
+										  const EINIFilesList INIFile ) {
 	if ( !GConfig ) return;
 
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetRotator( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetRotator( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetRotator( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetRotator( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetRotator( *sectionName, *variableName, value, GEngineIni );
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->SetVector2D( *SectionName, *VariableName, Vec2value, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->SetVector2D( *SectionName, *VariableName, Vec2value, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->SetVector2D( *SectionName, *VariableName, Vec2value, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->SetVector2D( *SectionName, *VariableName, Vec2value, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->SetVector2D( *SectionName, *VariableName, Vec2value, GEngineIni );
 	}
 }
 
-void UPPKLibraryTools::SetConfigColor( const FString sectionName, const FString variableName, const FLinearColor value, 
-									   const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigVector( const FString SectionName, const FString VariableName, const FVector VecValue, 
+										const EINIFilesList INIFile ) {
 	if ( !GConfig ) return;
 
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetColor( *sectionName, *variableName, value.ToFColor( true ), GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetColor( *sectionName, *variableName, value.ToFColor( true ), GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetColor( *sectionName, *variableName, value.ToFColor( true ), GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetColor( *sectionName, *variableName, value.ToFColor( true ), GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetColor( *sectionName, *variableName, value.ToFColor( true ), GEngineIni );
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->SetVector( *SectionName, *VariableName, VecValue, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->SetVector( *SectionName, *VariableName, VecValue, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->SetVector( *SectionName, *VariableName, VecValue, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->SetVector( *SectionName, *VariableName, VecValue, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->SetVector( *SectionName, *VariableName, VecValue, GEngineIni );
 	}
 }
 
-void UPPKLibraryTools::SetConfigString( const FString sectionName, const FString variableName, const FString value, 
-										const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigVector4( const FString SectionName, const FString VariableName, const FVector4 Vec4Value,
+										const EINIFilesList INIFile ) {
 	if ( !GConfig ) return;
 
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetString( *sectionName, *variableName, *value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetString( *sectionName, *variableName, *value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetString( *sectionName, *variableName, *value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetString( *sectionName, *variableName, *value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetString( *sectionName, *variableName, *value, GEngineIni );
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->SetVector4( *SectionName, *VariableName, Vec4Value, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->SetVector4( *SectionName, *VariableName, Vec4Value, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->SetVector4( *SectionName, *VariableName, Vec4Value, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->SetVector4( *SectionName, *VariableName, Vec4Value, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->SetVector4( *SectionName, *VariableName, Vec4Value, GEngineIni );
 	}
 }
 
-void UPPKLibraryTools::SetConfigVector2D( const FString sectionName, const FString variableName, const FVector2D value, 
-										  const EIniFilesList iniFile ) {
+void UPPKLibraryTools::SetConfigRotator( const FString SectionName, const FString VariableName, const FRotator RotValue, 
+										 const EINIFilesList INIFile ) {
 	if ( !GConfig ) return;
 
-	switch ( iniFile ) {
-		case EIniFilesList::GGameIni:
-			GConfig->SetVector2D( *sectionName, *variableName, value, GGameIni );
-		case EIniFilesList::GGameUserSettingsIni:
-			GConfig->SetVector2D( *sectionName, *variableName, value, GGameUserSettingsIni );
-		case EIniFilesList::GScalabilityIni:
-			GConfig->SetVector2D( *sectionName, *variableName, value, GScalabilityIni );
-		case EIniFilesList::GInputIni:
-			GConfig->SetVector2D( *sectionName, *variableName, value, GInputIni );
-		case EIniFilesList::GEngineIni:
-			GConfig->SetVector2D( *sectionName, *variableName, value, GEngineIni );
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->SetRotator( *SectionName, *VariableName, RotValue, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->SetRotator( *SectionName, *VariableName, RotValue, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->SetRotator( *SectionName, *VariableName, RotValue, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->SetRotator( *SectionName, *VariableName, RotValue, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->SetRotator( *SectionName, *VariableName, RotValue, GEngineIni );
+	}
+}
+
+void UPPKLibraryTools::SetConfigColor( const FString SectionName, const FString VariableName, const FLinearColor ColorValue, 
+									   const EINIFilesList INIFile ) {
+	if ( !GConfig ) return;
+
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->SetColor( *SectionName, *VariableName, ColorValue.ToFColor( true ), GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->SetColor( *SectionName, *VariableName, ColorValue.ToFColor( true ), GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->SetColor( *SectionName, *VariableName, ColorValue.ToFColor( true ), GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->SetColor( *SectionName, *VariableName, ColorValue.ToFColor( true ), GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->SetColor( *SectionName, *VariableName, ColorValue.ToFColor( true ), GEngineIni );
+	}
+}
+
+void UPPKLibraryTools::SetConfigString( const FString SectionName, const FString VariableName, const FString StrValue, 
+										const EINIFilesList INIFile ) {
+	if ( !GConfig ) return;
+
+	switch ( INIFile ) {
+		case EINIFilesList::GGameIni:
+			GConfig->SetString( *SectionName, *VariableName, *StrValue, GGameIni );
+		case EINIFilesList::GGameUserSettingsIni:
+			GConfig->SetString( *SectionName, *VariableName, *StrValue, GGameUserSettingsIni );
+		case EINIFilesList::GScalabilityIni:
+			GConfig->SetString( *SectionName, *VariableName, *StrValue, GScalabilityIni );
+		case EINIFilesList::GInputIni:
+			GConfig->SetString( *SectionName, *VariableName, *StrValue, GInputIni );
+		case EINIFilesList::GEngineIni:
+			GConfig->SetString( *SectionName, *VariableName, *StrValue, GEngineIni );
 	}
 }

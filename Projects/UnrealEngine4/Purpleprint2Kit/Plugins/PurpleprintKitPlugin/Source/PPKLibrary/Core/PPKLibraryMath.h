@@ -51,76 +51,76 @@ public:
 	static int32 FullRotSector( const float FloatValue, const int32 SectorsNumber );
 
 	/** Returns the sector index of the float using as reference the number of sectors */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Byte" )
 		static uint8 FullRotSectorByte( const float FloatValue, const int32 SectorsNumber );
 
 	/** Returns the sector index of the float using as reference the number of sectors */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Integer" )
 		static int32 FullRotSectorInt( const float FloatValue, const int32 SectorsNumber );
 
 	/** Returns the sector index of each FVector axis using as reference the number of sectors */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
-		static FVector FullRotSectorVector( const FVector VectorValue, const FVector SectorsNumber );
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Vector" )
+		static FVector FullRotSectorVector( const FVector VecValue, const FVector SectorsNumber );
 
 	/** Returns the sector index of each FRotator axis using as reference the number of sectors */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
-		static FVector FullRotSectorRotator( const FRotator RotatorValue, const FVector SectorsNumber );
-
-	/** Returns the euler like int32 value */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "To Full From Half (Integer)" ), Category = "PP2KLibrary|Math|Integer" )
-		static int32 IMakeFullFromHalfRot( const int32 intValue );
-
-	/** Returns the euler like float value */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "To Full From Half (Float)" ), Category = "PP2KLibrary|Math|Float" )
-		static float FMakeFullFromHalfRot( const float floatValue );
-
-	/** Returns the normalize like int32 value */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "To Half From Full (Integer)" ), Category = "PP2KLibrary|Math|Integer" )
-		static int32 ICMakeHalfFromFullRot( const int32 intValue );
-
-	/** Returns the normalize like float value */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "To Half From Full (Float)" ), Category = "PP2KLibrary|Math|Float" )
-		static float FMakeHalfFromFullRot( const float floatValue );
-
-	/** Returns the euler like FRotator value */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 180 To 360 Rotation" ), Category = "PP2KLibrary|Math|Rotator" )
-		static FRotator MakeFullFromHalfRot( const FRotator rotationValue );
-
-	/** Returns the normalize like FRotator value */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 360 To 180 Rotation" ), Category = "PP2KLibrary|Math|Rotator" )
-		static FRotator MakeHalfFromFullRot( const FRotator rotationValue );
-
-	/** Returns the euler like FVector2D value */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 180 To 360 Rotation" ), Category = "PP2KLibrary|Math|Vector2D" )
-		static FVector2D V2DMakeFullFromHalfRot( const FVector2D vector2DValue );
-
-	/** Returns the normalize like FVector2D value */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 360 To 180 Rotation" ), Category = "PP2KLibrary|Math|Vector2D" )
-		static FVector2D V2DMakeHalfFromFullRot( const FVector2D vector2DValue );
-
-	/** Returns the euler like FVector value */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 180 To 360 Rotation" ), Category = "PP2KLibrary|Math|Vector" )
-		static FVector VMakeFullFromHalfRot( const FVector vectorValue );
-
-	/** Returns the normalize like FVector value */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 360 To 180 Rotation" ), Category = "PP2KLibrary|Math|Vector" )
-		static FVector VMakeHalfFromFullRot( const FVector vectorValue );
-
-	/** Returns the euler like FVector4 value */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 180 To 360 Rotation" ), Category = "PP2KLibrary|Math|Vector4" )
-		static FVector4 V4MakeFullFromHalfRot( const FVector4 vector4Value );
-
-	/** Returns the normalize like FVector value */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 360 To 180 Rotation" ), Category = "PP2KLibrary|Math|Vector4" )
-		static FVector4 V4MakeHalfFromFullRot( const FVector4 vector4Value );
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Vector" )
+		static FVector FullRotSectorRotator( const FRotator RotValue, const FVector SectorsNumber );
 
 	/** Returns the number of characters in the int */
 	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Integer Size" ), Category = "PP2KLibrary|Math|Utils" )
-		static int32 IntCount( const int32 intValue );
+		static int32 IntCount( const int32 IntValue );
 
 	/** Returns the number of characters in the float */
 	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Float Size" ), Category = "PP2KLibrary|Math|Utils" )
-		static int32 FloatCount( const float floatValue );
+		static int32 FloatCount( const float FloatValue );
+
+	/** Returns the euler like int32 value */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "To Full From Half (Integer)" ), Category = "PP2KLibrary|Math|Integer" )
+		static int32 IMakeFullFromHalfRot( const int32 IntValue );
+
+	/** Returns the euler like float value */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "To Full From Half (Float)" ), Category = "PP2KLibrary|Math|Float" )
+		static float FMakeFullFromHalfRot( const float FloatValue );
+
+	/** Returns the normalize like int32 value */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "To Half From Full (Integer)" ), Category = "PP2KLibrary|Math|Integer" )
+		static int32 ICMakeHalfFromFullRot( const int32 IntValue );
+
+	/** Returns the normalize like float value */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "To Half From Full (Float)" ), Category = "PP2KLibrary|Math|Float" )
+		static float FMakeHalfFromFullRot( const float FloatValue );
+
+	/** Returns the euler like FRotator value */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 180 To 360 Rotation" ), Category = "PP2KLibrary|Math|Rotator" )
+		static FRotator MakeFullFromHalfRot( const FRotator RotValue );
+
+	/** Returns the normalize like FRotator value */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 360 To 180 Rotation" ), Category = "PP2KLibrary|Math|Rotator" )
+		static FRotator MakeHalfFromFullRot( const FRotator RotValue );
+
+	/** Returns the euler like FVector2D value */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 180 To 360 Rotation" ), Category = "PP2KLibrary|Math|Vector2D" )
+		static FVector2D V2DMakeFullFromHalfRot( const FVector2D Vec2Value );
+
+	/** Returns the normalize like FVector2D value */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 360 To 180 Rotation" ), Category = "PP2KLibrary|Math|Vector2D" )
+		static FVector2D V2DMakeHalfFromFullRot( const FVector2D Vec2Value );
+
+	/** Returns the euler like FVector value */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 180 To 360 Rotation" ), Category = "PP2KLibrary|Math|Vector" )
+		static FVector VMakeFullFromHalfRot( const FVector VecValue );
+
+	/** Returns the normalize like FVector value */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 360 To 180 Rotation" ), Category = "PP2KLibrary|Math|Vector" )
+		static FVector VMakeHalfFromFullRot( const FVector VecValue );
+
+	/** Returns the euler like FVector4 value */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 180 To 360 Rotation" ), Category = "PP2KLibrary|Math|Vector4" )
+		static FVector4 V4MakeFullFromHalfRot( const FVector4 Vec4Value );
+
+	/** Returns the normalize like FVector value */
+	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "Convert 360 To 180 Rotation" ), Category = "PP2KLibrary|Math|Vector4" )
+		static FVector4 V4MakeHalfFromFullRot( const FVector4 Vec4Value );
 	
 	/** Returns the minimum value of A and B */
 	UFUNCTION( BlueprintPure, meta = ( DisplayName = "Min (Byte)", CompactNodeTitle = "MIN", CommutativeAssociativeBinaryOperator = "true" ), Category = "PP2KLibrary|Math|Byte" )
