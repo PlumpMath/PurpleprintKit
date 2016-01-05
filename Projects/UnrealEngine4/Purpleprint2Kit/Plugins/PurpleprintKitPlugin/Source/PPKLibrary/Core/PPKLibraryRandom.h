@@ -57,14 +57,14 @@ public:
 
 	/** Create the random seed */
 	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
-		static void CreateRandomSeed( int32 seed );
+		static void CreateRandomSeed( int32 Seed );
 
-	/** Update the random seed */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "To Full From Half (Integer)" ), Category = "PP2KLibrary|Math|Random" )
+	/** Update the random seed by time */
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
 		static void RandomSeedByTime();
 
-	/** Update the random seed */
-	UFUNCTION( BlueprintCallable, meta = ( DisplayName = "To Full From Half (Integer)" ), Category = "PP2KLibrary|Math|Random" )
+	/** Update the random seed by entropy */
+	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
 		static void RandomSeedByEntropy();
 
 	/** Returns a bool value using the Uniform method */
@@ -107,7 +107,7 @@ public:
 	UFUNCTION( BlueprintPure, meta = ( DisplayName = "Random Float (Uniform)" ), Category = "PP2KLibrary|Math|Random" )
 		static float RandomFloat_Uniform( const float Max );
 
-	/** Returns a float in the range 0.0 to 1.0 value using the Uniform method */
+	/** Returns a float in the range 0.0 to 1.0 value using the Canonical method */
 	UFUNCTION( BlueprintPure, meta = ( DisplayName = "Random Float (Canonical)" ), Category = "PP2KLibrary|Math|Random" )
 		static float RandomFloat_Canonical();
 		
