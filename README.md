@@ -44,15 +44,13 @@ Unreal® Engine, Copyright 1998 – 2016, Epic Games, Inc. All rights reserved.
 
 
 ## Websites:
+- [Purpleprint Website][PurpleprintWeb]
 - [Hevedy - Twitter][HevedyTwitter]
 - [Hevedy - Github][HevedyGithub]
 - [Hevedy - Purpleprint Kit][PurpleprintKitGithub]
 - [Unreal Engine 4 - Purpleprint Kit Post][UE4PostPK]
 - [Unreal Engine 4 - Website][UE4Website]
 - [Unreal Engine 4 - Github][UE4Github]
-- [Urho3D - Purpleprint Kit Post][Urho3DPostPK]
-- [Urho3D - Website][Urho3DWebsite]
-- [Urho3D - Github][Urho3DGithub]
 
 
 
@@ -70,14 +68,13 @@ By David Palacios (Hevedy) <https://github.com/Hevedy>.
 [AudacityL]: http://audacityteam.org/
 [LMMSL]: https://lmms.io/
 
+
+[PurpleprintWeb]: http://hevedy.github.io/Purpleprint/
 [HevedyTwitter]: https://twitter.com/Hevedy
 [HevedyGithub]: https://github.com/Hevedy
 [PurpleprintKitGithub]: https://github.com/Hevedy/PurpleprintKit
-[Urho3DGithub]: https://github.com/urho3d/Urho3D
-[Urho3DWebsite]: http://urho3d.github.io/
-[Urho3DPostPK]: http://urho3d.prophpbb.com/topic727.html
 [UE4Github]: https://github.com/EpicGames/UnrealEngine
 [UE4Website]: https://www.unrealengine.com/
-[UE4PostPK]: https://forums.unrealengine.com/showthread.php?55984-Purpleprint-Kit-for-Unreal-Engine-4-amp-Urho3D
+[UE4PostPK]: https://forums.unrealengine.com/showthread.php?92089-ASSETS-PLUGIN-FREE-Purpleprint-2-Kit-by-Hevedy
 [Trello]: https://trello.com/b/vx7Ydo7I/public-projects
 [Roboto]: http://www.google.com/fonts/specimen/Roboto
