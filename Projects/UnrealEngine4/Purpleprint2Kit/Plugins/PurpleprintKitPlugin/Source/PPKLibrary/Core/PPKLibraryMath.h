@@ -34,11 +34,8 @@ PPKLibraryMath.h
 
 #pragma once
 
-#include <chrono>
-#include <random>
-#include <math.h>
-
 #include "PPKLibraryMath.generated.h"
+
 
 UCLASS()
 class PPKLIBRARY_API UPPKLibraryMath : public UBlueprintFunctionLibrary {
@@ -50,19 +47,6 @@ private:
 protected:
 
 public:
-	//TODO Random functions
-
-	/** Build the random function seeds */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
-		static void BuildRandom();
-
-	/** Create the random seed */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
-		static void CreateRandomSeed( int32 seed );
-
-	/** Update the random seed */
-	UFUNCTION( BlueprintCallable, Category = "PP2KLibrary|Math|Random" )
-		static void UpdateRandomSeedTime();
 
 	static int32 FullRotSector( const float FloatValue, const int32 SectorsNumber );
 

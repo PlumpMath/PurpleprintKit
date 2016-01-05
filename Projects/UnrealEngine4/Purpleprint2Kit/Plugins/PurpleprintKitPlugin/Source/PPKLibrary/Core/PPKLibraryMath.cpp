@@ -35,36 +35,10 @@ PPKLibraryMath.cpp
 #include "PPKLibraryPrivatePCH.h"
 #include "PPKLibraryMath.h"
 
-#include <chrono>
-#include <random>
-
 
 UPPKLibraryMath::UPPKLibraryMath( const class FObjectInitializer& ObjectInitializer ) {
 
 }
-
-std::random_device rd;
-unsigned gseed = std::chrono::system_clock::now().time_since_epoch().count();
-
-void UPPKLibraryMath::BuildRandom() {
-	gseed = std::chrono::system_clock::now().time_since_epoch().count();
-
-	if ( rd.entropy() == 0 ) {
-		CreateRandomSeed( gseed );
-	} else {
-		CreateRandomSeed( rd() );
-	}
-}
-
-void UPPKLibraryMath::CreateRandomSeed( int32 Seed ) {
-	gseed = Seed;
-}
-
-void UPPKLibraryMath::UpdateRandomSeedTime() {
-	gseed = std::chrono::system_clock::now().time_since_epoch().count();
-}
-
-//TODO add the 2 random types Uniform and Default get functions Bool/Int/Float/Vector2D/Vector/Vector4
 
 int32 UPPKLibraryMath::FullRotSector( const float FloatValue, const int32 SectorsNumber ) {
 	int32 calcSectors = FMath::TruncToInt( 360 / SectorsNumber );
@@ -216,26 +190,32 @@ float UPPKLibraryMath::FGetFurther( float Ref, float A, float B ) {
 	return Further<float>( Ref, A, B );
 }
 
-void UPPKLibraryMath::CloserIntArray( const int32 IntRefValue, const TArray<int32>& IntArray, const bool NotEqual, int32& IndexOfCloserValue, int32& CloserValue ) {
+void UPPKLibraryMath::CloserIntArray( const int32 IntRefValue, const TArray<int32>& IntArray, const bool NotEqual, 
+									  int32& IndexOfCloserValue, int32& CloserValue ) {
 	CloserValue = Closer<int32>( IntRefValue, IntArray, NotEqual, &IndexOfCloserValue );
 }
 
-void UPPKLibraryMath::FurtherIntArray( const int32 IntRefValue, const TArray<int32>& IntArray, int32& IndexOfFurtherValue, int32& FurtherValue ) {
+void UPPKLibraryMath::FurtherIntArray( const int32 IntRefValue, const TArray<int32>& IntArray, int32& IndexOfFurtherValue, 
+									   int32& FurtherValue ) {
 	FurtherValue = Further<int32>( IntRefValue, IntArray, &IndexOfFurtherValue );
 }
 
-void UPPKLibraryMath::CloserFloatArray( const float FloatRefValue, const TArray<float>& FloatArray, const bool NotEqual, int32& IndexOfCloserValue, float& CloserValue ) {
+void UPPKLibraryMath::CloserFloatArray( const float FloatRefValue, const TArray<float>& FloatArray, const bool NotEqual, 
+										int32& IndexOfCloserValue, float& CloserValue ) {
 	CloserValue = Closer<float>( FloatRefValue, FloatArray, NotEqual, &IndexOfCloserValue );
 }
 
-void UPPKLibraryMath::FurtherFloatArray( const float FloatRefValue, const TArray<float>& FloatArray, int32& IndexOfFurtherValue, float& FurtherValue ) {
+void UPPKLibraryMath::FurtherFloatArray( const float FloatRefValue, const TArray<float>& FloatArray, int32& IndexOfFurtherValue, 
+										 float& FurtherValue ) {
 	FurtherValue = Further<float>( FloatRefValue, FloatArray, &IndexOfFurtherValue );
 }
 
-void UPPKLibraryMath::CloserByteArray( const uint8 ByteRefValue, const TArray<uint8>& ByteArray, const bool NotEqual, int32& IndexOfCloserValue, uint8& CloserValue ) {
+void UPPKLibraryMath::CloserByteArray( const uint8 ByteRefValue, const TArray<uint8>& ByteArray, const bool NotEqual, 
+									   int32& IndexOfCloserValue, uint8& CloserValue ) {
 	CloserValue = Closer<uint8>( ByteRefValue, ByteArray, NotEqual, &IndexOfCloserValue );
 }
 
-void UPPKLibraryMath::FurtherByteArray( const uint8 ByteRefValue, const TArray<uint8>& ByteArray, int32& IndexOfFurtherValue, uint8& FurtherValue ) {
+void UPPKLibraryMath::FurtherByteArray( const uint8 ByteRefValue, const TArray<uint8>& ByteArray, int32& IndexOfFurtherValue, 
+										uint8& FurtherValue ) {
 	FurtherValue = Further<uint8>( ByteRefValue, ByteArray, &IndexOfFurtherValue );
 }
